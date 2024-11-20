@@ -1,0 +1,43 @@
+---
+import IconGithub from "./icon-component/IconGithub.astro";
+import IconGmail from "./icon-component/IconGmail.astro";
+import IconLinkedin from "./icon-component/IconLinkedin.astro";
+
+
+---
+<div class="flex flex-col bg-[#1D1D1D] px-40 py-8">
+    <nav class="flex flex-row-reverse justify-between">
+        <ul class="flex space-x-8 text-[#F6F6F6] items-center">
+            <li 
+                class="text-sm font-normal rounded-xl cursor-pointer"
+                tabindex="0"
+            >
+                Home
+            </li>
+            <li 
+                class="text-sm font-normal rounded-xl cursor-pointer"
+                tabindex="1"
+            >
+                About
+            </li>
+            <li 
+                class="text-sm font-normal rounded-xl cursor-pointer"
+                tabindex="2"
+            >
+                Blog
+            </li>
+        </ul>
+        <img 
+            src="/assets/MMRI.svg"
+            alt="Blog Logo"
+        />
+    </nav>
+
+    <div class="flex justify-center space-x-3 py-8 border-b border-b-[#363636] mb-8">
+        <IconGmail />
+        <IconGithub />
+        <IconLinkedin />
+    </div>
+
+    <p class="text-lg font-normal text-white self-center">@ Mohamad Rafi Irfansyah 2024</p>
+</div>
