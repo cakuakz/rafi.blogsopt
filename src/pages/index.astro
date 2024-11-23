@@ -1,0 +1,42 @@
+---
+import { BlogCoverStatic, CloudinaryBaseUrl } from "@utils/static"
+import BlogCard from "../components/blog/BlogCard.astro"
+import MainLayout from "../layouts/MainLayout.astro"
+import CustomPageTitle from "@components/CustomPageTitle.astro"
+import CustomInput from "@components/CustomInput.astro"
+
+// const convertUrl = (url: string) => {
+//     const newUrl = `${CloudinaryBaseUrl}/${url}`
+//     return newUrl
+// }
+---
+
+<MainLayout
+    title="Index"
+>
+    <div class="flex flex-col px-20 pb-72 justify-center">
+        <div class="flex flex-col mb-11">
+            <CustomPageTitle 
+                title="Blog"
+            />
+            <p class="text-base font-normal text-[#7E7E7E]">Discover process behind every project</p>
+        </div>
+        <div class="px-[431px]">
+            <CustomInput 
+                placeholder="Search Input"
+                iconName="mingcute:search-2-line"
+                iconClassname="w-4 text-[#83868A] ml-3"
+            />
+        </div>
+        <div class="mt-11 grid lg:grid-cols-3 md:grid-cols-2 gap-y-12 gap-x-3">
+            {BlogCoverStatic.map((item) => (
+                <BlogCard 
+                    title={item.title}
+                    description={item.description}
+                    imgUrl={item.imgUrl}
+                    duration={item.duration}
+                />
+            ))}
+        </div>
+    </div>
+</MainLayout>

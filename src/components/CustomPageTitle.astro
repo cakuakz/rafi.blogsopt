@@ -1,0 +1,10 @@
+---
+interface Props {
+    title: string
+}
+
+const { title } = Astro.props
+---
+<span class="w-fit font-bold text-5xl bg-gradient-to-r from-[#F6F6F6] to-[#909090] bg-clip-text text-transparent pb-1">
+    {title}
+</span>
