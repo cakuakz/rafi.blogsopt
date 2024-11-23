@@ -5,10 +5,10 @@ import tailwind from '@astrojs/tailwind';
 
 import icon from 'astro-icon';
 
+import mdx from '@astrojs/mdx';
+
 // https://astro.build/config
 export default defineConfig({
-  integrations: [
-    tailwind(), 
-    icon(),
-  ]
+  site: process.env.SITE_URL || 'http://localhost:4321',
+  integrations: [tailwind(), icon(), mdx()]
 });

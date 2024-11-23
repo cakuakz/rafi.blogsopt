@@ -1,0 +1,44 @@
+---
+import { BlogCoverStatic } from "@utils/static"
+import CustomPageTitle from "@components/CustomPageTitle.astro"
+import CustomInput from "@components/CustomInput.astro"
+import MainLayout from "@layouts/MainLayout.astro"
+import BlogCard from "@components/blog/BlogCard.astro"
+import { getCollection } from "astro:content"
+
+const posts = (await getCollection('blog')).sort(
+	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+)
+---
+
+<MainLayout
+    title="Index"
+    description="Index Example"
+>
+    <div class="flex flex-col px-20 pb-72 justify-center">
+        <div class="flex flex-col mb-11">
+            <CustomPageTitle 
+                title="Blog"
+            />
+            <p class="text-base font-normal text-[#7E7E7E]">Discover process behind every project</p>
+        </div>
+        <div class="px-[431px]">
+            <CustomInput 
+                placeholder="Search Input"
+                iconName="mingcute:search-2-line"
+                iconClassname="w-4 text-[#83868A] ml-3"
+            />
+        </div>
+        <div class="mt-11 grid lg:grid-cols-3 md:grid-cols-2 gap-y-12 gap-x-3">
+            {posts.map((item) => (
+                <BlogCard 
+                    title={item.data.title}
+                    description={item.data.description}
+                    imgUrl={item.data?.heroImage}
+                    tags={item.data.tags}
+                    href={`/blog/${item.slug}/`}
+                />
+            ))}
+        </div>
+    </div>
+</MainLayout>

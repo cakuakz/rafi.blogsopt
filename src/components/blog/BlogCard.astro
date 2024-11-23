@@ -1,34 +1,43 @@
 ---
 import { CldImage } from 'astro-cloudinary'
 import { Icon } from 'astro-icon/components'
+import BlogTag from './BlogTag.astro'
 
 interface Props {
     title: string
     description: string
-    imgUrl: string
-    duration: string
+    imgUrl?: string
+    tags: string[]
+    href: string
 }
 
-const { title, description, imgUrl, duration } = Astro.props
+const { title, description, imgUrl, tags, href } = Astro.props
 ---
 
-<div 
-    class="flex flex-col justify-self-center border border-[#242424] bg-[#1C1C1C] rounded-sm w-fit"
->
-    <CldImage 
-        src={imgUrl}
-        height={234}
-        alt="Blog Image"
-        class="w-full"
-    />
-    <div
-        class="p-4 flex flex-col justify-start"
+<a href={href}>
+    <div 
+        class="flex flex-col justify-self-center border border-[#242424] bg-[#1C1C1C] rounded-sm w-fit cursor-pointer"
     >
-        <p class="text-sm font-semibold text-[#F6F6F6]">{title}</p>
-        <p class="text-sm font-normal text-[#858585] mb-4">{description}</p>
-        <div class="flex space-x-2 items-center">
-            <Icon name="mingcute:time-line" class="text-white"/>
-            <p class="text-sm text-[#858585] font-normal">{duration}</p>
+        <CldImage 
+            src={imgUrl || "https://res.cloudinary.com/rafirfansyah/image/upload/v1731826909/React_Image_s6nsdn.png"}
+            height={234}
+            alt="Blog Image"
+            class="w-full"
+        />
+        <div
+            class="p-4 flex flex-col justify-start"
+        >
+            <p class="text-sm font-semibold text-[#F6F6F6]">{title}</p>
+            <p class="text-sm font-normal text-[#858585] mb-4">{description}</p>
+            <div class="flex space-x-2 items-center">
+                <Icon name="mingcute:time-line" class="text-white"/>
+                <p class="text-sm text-[#858585] font-normal">5 Minutes</p>
+            </div>
+            <div class="flex space-x-4">
+                {tags.map((tag) => (
+                    <BlogTag tags={tag}/>
+                ))}
+            </div>
         </div>
     </div>
-</div>
+</a>
