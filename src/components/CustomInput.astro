@@ -10,7 +10,7 @@ interface Props {
 const { placeholder, iconName, iconClassname } = Astro.props
 ---
 
-<div class="bg-[#1C1C1C] flex items-center border border-[#282828] rounded-xl py-3 space-x-3">
+<div class="bg-[#1C1C1C] flex items-center border border-[#282828] rounded-xl py-3 space-x-3 drop-shadow-custom-input">
     {iconName && (
         <Icon name={iconName} class={iconClassname} />
     )}

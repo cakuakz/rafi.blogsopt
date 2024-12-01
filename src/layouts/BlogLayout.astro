@@ -1,17 +1,23 @@
 ---
 import BaseHead from '@components/BaseHead.astro';
 import BlogTag from '@components/blog/BlogTag.astro';
+import TableOfContent from '@components/blog/TableOfContent.astro';
 import CustomPageTitle from '@components/CustomPageTitle.astro';
 import Footer from '@components/Footer.astro';
 import FormattedDate from '@components/FormattedDate.astro';
 import Navbar from '@components/Navbar.astro';
 import '@fontsource-variable/inter';
-import { CldImage } from 'astro-cloudinary';
 import type { CollectionEntry } from 'astro:content';
 
-type Props = CollectionEntry<'blog'>['data'];
+type Props = CollectionEntry<'blog'>['data'] & {
+    headings: {
+		depth: number;
+		slug: string;
+		text: string;
+	}[]
+}
 
-const { title, description, pubDate, updatedDate, heroImage, tags } = Astro.props;
+const { title, description, pubDate, updatedDate, tags, headings, duration } = Astro.props;
 ---
 
 <!doctype html>
@@ -23,53 +29,95 @@ const { title, description, pubDate, updatedDate, heroImage, tags } = Astro.prop
 		<Navbar />
         <main>
             <article>
-                <div class="px-20 py-24 flex flex-col">
-                    {
-                        heroImage && (
-                            <CldImage 
-                                src={heroImage}
-                                alt=""
-                                class="w-full h-72 mb-12"
-                            />
-                        )
-                    }
-                    <CustomPageTitle title={title}/>
-                    <div class="flex flex-col space-y-4">
-                        <p class="text-white font-light text-base pr-7">{description}</p>
-                        <div class="flex">
-                            <p class="text-white font-light text-base pr-7">{pubDate}</p>
-                            <FormattedDate date={pubDate} />
-							{
-								updatedDate && (
-									<div class="last-updated-on">
-										Last updated on <FormattedDate date={updatedDate} />
-									</div>
-								)
-							}
+                <img src="/assets/radial_pattern_bg.svg" alt="Radial Bg" class="absolute top-0 left-0 opacity-30 z-[-1]" />
+                <div class="flex flex-col px-20 py-24 relative">
+                    <CustomPageTitle textSize="text-[4.5rem]" title={title} />
+                    <div class="flex">
+                        <div class="flex flex-col">
+                            <div class="flex flex-col space-y-16">
+                                <p class="text-[#F6F6F6] font-light text-lg pr-7">{description}</p>
+                                <div class="flex items-center">
+                                    <div class="pr-7 border-r-[0.5px] border-r-white">
+                                        <FormattedDate date={pubDate} />
+                                    </div>
+                                    <span class="px-7">
+                                        <p class="text-[#F6F6F6] font-light text-xs">{duration}</p>
+                                    </span>
+                                    {updatedDate && (
+                                        <div class="last-updated-on">
+                                            Last updated on <FormattedDate date={updatedDate} />
+                                        </div>
+                                    )}
+                                </div>
+                            </div>
+                            <div class="flex flex-col mt-5 p-4 border border-[#272727] rounded-md max-w-[850px]">
+                                <p class="text-white font-light text-base pr-7">Topics</p>
+                                <div class="flex space-x-4 mt-3 w-fit">
+                                    {tags.map((tag) => (
+                                        <BlogTag tags={tag} />
+                                    ))}
+                                </div>
+                            </div>
+                            <div class="blog-body">
+                                <slot />
+                            </div>
+                        </div>
+                        <div class="flex flex-col items-center pl-32 pt-32 w-fit">
+                            {headings.length > 0 && <TableOfContent headings={headings} />}
                         </div>
                     </div>
-                    <div class="flex flex-col mt-6 p-4 border border-[#272727] rounded-md">
-                        <p class="text-white font-light text-base pr-7">Tags</p>
-                        <div class="flex space-x-4">
-                            {tags.map((tag) => (
-                                <BlogTag tags={tag}/>
-                            ))}
-                        </div>
-                    </div>
-                    <slot />
                 </div>
             </article>
         </main>
-		<slot />
 		<Footer />
 	</body>
 </html>
 <style is:global>
-	html {
-		font-family: 'Inter Variable', sans-serif;
-	}
+    html {
+        font-family: 'Inter Variable', sans-serif;
+        scroll-behavior: smooth;
+    }
 
-	body {
-		background-color: #161616;
-	}
+    body {
+        background-color: #161616;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        line-height: 1.7;
+    }
+
+    h1 {
+        font-size: 3.052em;
+    }
+
+    h2 {
+        font-size: 2.441em;
+    }
+
+    h3 {
+        font-size: 1.953em;
+    }
+
+    h4 {
+        font-size: 1.563em;
+    }
+
+    h5 {
+        font-size: 1.25em;
+    }
+
+    h6 {
+        font-size: 1em;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+        font-weight: 600;
+        color: #ffffff;
+        position: relative;
+    }
+
+    .blog-body {
+        color: #83868A;
+        padding-top: 2em;
+    }
 </style>
+

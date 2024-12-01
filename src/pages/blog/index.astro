@@ -1,13 +1,19 @@
 ---
-import { BlogCoverStatic } from "@utils/static"
 import CustomPageTitle from "@components/CustomPageTitle.astro"
 import CustomInput from "@components/CustomInput.astro"
 import MainLayout from "@layouts/MainLayout.astro"
 import BlogCard from "@components/blog/BlogCard.astro"
 import { getCollection } from "astro:content"
+import ButtonBlogTags from "@components/blog/ButtonBlogTags"
 
 const posts = (await getCollection('blog')).sort(
-	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+    (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+)
+
+const tags = Array.from(
+    new Set(
+        posts.flatMap(post => post.data.tags || [])
+    )
 )
 ---
 
@@ -29,16 +35,68 @@ const posts = (await getCollection('blog')).sort(
                 iconClassname="w-4 text-[#83868A] ml-3"
             />
         </div>
-        <div class="mt-11 grid lg:grid-cols-3 md:grid-cols-2 gap-y-12 gap-x-3">
-            {posts.map((item) => (
-                <BlogCard 
-                    title={item.data.title}
-                    description={item.data.description}
-                    imgUrl={item.data?.heroImage}
-                    tags={item.data.tags}
-                    href={`/blog/${item.slug}/`}
-                />
-            ))}
+        <div id="blog-container">
+            <div class="flex items-center justify-center mt-10 space-x-4">
+                <p class="text-sm font-normal text-[#515457]">Choose topic</p>
+                {tags.map((tag) => (
+                    <ButtonBlogTags 
+                        tag={tag}
+                        isSelected={false}
+                        onTagClick={() => {}}
+                        client:load
+                    />
+                ))}
+            </div>
+            <div class="mt-28 grid lg:grid-cols-3 md:grid-cols-2 gap-y-12 gap-x-3">
+                {posts.map((item) => (
+                    <BlogCard 
+                        title={item.data.title}
+                        description={item.data.description}
+                        imgUrl={item.data?.heroImage}
+                        tags={item.data.tags}
+                        href={`/blog/${item.slug}/`}
+                        duration={item.data.duration}
+                    />
+                ))}
+            </div>
         </div>
     </div>
 </MainLayout>
+
+<script>
+    let selectedTag: string | null = null;
+    const blogContainer = document.getElementById('blog-container');
+    const posts = Array.from(blogContainer?.querySelectorAll('[data-post]') || []);
+    const buttons = Array.from(document.querySelectorAll('button'));
+
+    function filterPosts() {
+        posts.forEach((post) => {
+            const postTags = JSON.parse(post.getAttribute('data-tags') || '[]');
+            const postElement = post.closest('.justify-self-center');
+            if (!selectedTag || postTags.includes(selectedTag)) {
+                postElement?.classList.remove('hidden');
+            } else {
+                postElement?.classList.add('hidden');
+            }
+        });
+
+        buttons.forEach((button) => {
+            const buttonTag = button.querySelector('p')?.textContent;
+            if (buttonTag === selectedTag) {
+                button.classList.add('text-[#F6F6F6]', 'bg-[#2E2F2F]');
+                button.classList.remove('opacity-50');
+            } else {
+                button.classList.remove('text-[#F6F6F6]', 'bg-[#2E2F2F]');
+                button.classList.add('opacity-50');
+            }
+        });
+    }
+
+    buttons.forEach((button) => {
+        button.addEventListener('click', () => {
+            const tag = button.querySelector('p')?.textContent || null;
+            selectedTag = selectedTag === tag ? null : tag;
+            filterPosts();
+        });
+    });
+</script>
