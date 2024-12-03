@@ -64,39 +64,52 @@ const tags = Array.from(
 </MainLayout>
 
 <script>
-    let selectedTag: string | null = null;
-    const blogContainer = document.getElementById('blog-container');
-    const posts = Array.from(blogContainer?.querySelectorAll('[data-post]') || []);
-    const buttons = Array.from(document.querySelectorAll('button'));
+    let selectedTag: string | null = null
+    const blogContainer = document.getElementById('blog-container')
+    const searchInput = document.querySelector('input')
+    const posts = Array.from(blogContainer?.querySelectorAll('[data-post]') || [])
+    const buttons = Array.from(document.querySelectorAll('button'))
 
     function filterPosts() {
+        const searchText = (searchInput?.value || "").toLowerCase()
+
         posts.forEach((post) => {
-            const postTags = JSON.parse(post.getAttribute('data-tags') || '[]');
-            const postElement = post.closest('.justify-self-center');
-            if (!selectedTag || postTags.includes(selectedTag)) {
-                postElement?.classList.remove('hidden');
+            const postTags = JSON.parse(post.getAttribute('data-tags') || '[]')
+            const postTitle = post.querySelector('.post-title')?.textContent?.toLowerCase() || ''
+            const postDescription = post.querySelector('.post-description')?.textContent?.toLowerCase() || ''
+            const postElement = post.closest('.justify-self-center')
+            
+            const matchesSearch = postTitle.includes(searchText) || postDescription.includes(searchText)
+            const matchesTag = !selectedTag || postTags.includes(selectedTag)
+
+            if (matchesSearch && matchesTag) {
+                postElement?.classList.remove('hidden')
             } else {
-                postElement?.classList.add('hidden');
+                postElement?.classList.add('hidden')
             }
-        });
+        })
 
         buttons.forEach((button) => {
-            const buttonTag = button.querySelector('p')?.textContent;
+            const buttonTag = button.querySelector('p')?.textContent
             if (buttonTag === selectedTag) {
-                button.classList.add('text-[#F6F6F6]', 'bg-[#2E2F2F]');
-                button.classList.remove('opacity-50');
+                button.classList.add('text-[#F6F6F6]', 'bg-[#2E2F2F]')
+                button.classList.remove('opacity-50')
             } else {
-                button.classList.remove('text-[#F6F6F6]', 'bg-[#2E2F2F]');
-                button.classList.add('opacity-50');
+                button.classList.remove('text-[#F6F6F6]', 'bg-[#2E2F2F]')
+                button.classList.add('opacity-50')
             }
-        });
+        })
     }
 
     buttons.forEach((button) => {
         button.addEventListener('click', () => {
-            const tag = button.querySelector('p')?.textContent || null;
-            selectedTag = selectedTag === tag ? null : tag;
-            filterPosts();
-        });
-    });
+            const tag = button.querySelector('p')?.textContent || null
+            selectedTag = selectedTag === tag ? null : tag
+            filterPosts()
+        })
+    })
+
+    searchInput?.addEventListener('input', () => {
+        filterPosts()
+    })
 </script>
