@@ -2,7 +2,7 @@
 title: Understanding Data Fetching Strategies
 description: Simple explanation about data fetching methods
 pubDate: 2024-12-01
-heroImage: https://res.cloudinary.com/rafirfansyah/image/upload/v1733037034/632558bac3690972f2e9bf90_database-light_ndhlzs.png
+heroImage: 632558bac3690972f2e9bf90_database-light_ndhlzs
 tags: ['data-fetch', 'nextjs', 'frontend']
 duration: 10 Minutes
 ---

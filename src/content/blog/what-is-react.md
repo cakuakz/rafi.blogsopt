@@ -2,7 +2,7 @@
 title: What is React.js?
 description: Here's to know more about what React.Js actually is
 pubDate: Nov 23 2024
-heroImage: https://res.cloudinary.com/rafirfansyah/image/upload/v1731826909/React_Image_s6nsdn.png
+heroImage: React_Image_s6nsdn.png
 tags: ['javascript', 'reactjs']
 duration: 5 Minutes
 ---

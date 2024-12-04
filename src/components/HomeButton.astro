@@ -1,0 +1,12 @@
+---
+interface Props {
+    text: string
+}
+
+const { text } = Astro.props
+---
+<button class="bg-gradient-to-b from-[#464646] to-[#2C2C2C] bg-clip-border p-[2px] rounded-[10px]">
+    <div class="bg-[#262626] px-8 py-3 border-2 border-transparent w-full h-full flex items-center justify-center rounded-lg">
+        <p class="text-[#F6F6F6] font-medium text-lg">{text}</p>
+    </div>
+</button>

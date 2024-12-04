@@ -1,0 +1,18 @@
+---
+import { Image } from "astro:assets";
+
+interface Props {
+    imageSource: string
+    text: string
+}
+
+const { imageSource, text } = Astro.props
+---
+
+<div class="flex space-x-1 px-3 py-2 rounded-xl bg-gradient-to-b from-[#3E3E3E] to-[#343434] 
+    [box-shadow:inset_0px_-4px_4px_rgba(14,14,14,0.5),inset_0px_1px_1px_rgba(255,255,255,0.4)]">
+    <img src={imageSource} alt="Stackbox logo"/>
+    <p class="text-2xl font-semibold bg-gradient-to-b from-[#F6F6F6] to-[#909090] text-transparent bg-clip-text [text-shadow:0px_1px_2px_rgba(13,13,13,0.4)]">
+        {text}
+    </p>
+</div>
