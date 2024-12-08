@@ -1,0 +1,39 @@
+---
+import { Image } from "astro:assets"
+import flashLogo from "../../../public/assets/icons/flash-logo.svg"
+import bracesCheckmarkLogo from "../../../public/assets/icons/braces-checkmark-logo.svg"
+import layerStackLogo from "../../../public/assets/icons/layer-stack-logo.svg"
+import CustomPageTitle from "@components/CustomPageTitle.astro"
+
+const traitsData = [
+    {
+        logoUrl: flashLogo,
+        title: "Optimized Performance",
+        description: "Delivering fast, stable, and responsive applications through efficient code practices"
+    },
+    {
+        logoUrl: bracesCheckmarkLogo,
+        title: "Precision in Execution",
+        description: "Ensuring every detail enhances functionality, user experience, and overall quality"
+    },
+    {
+        logoUrl: layerStackLogo,
+        title: "Readable & Scalable Code",
+        description: "Delivering fast, stable, and responsive applications through efficient code practices"
+    }
+]
+---
+<div class="flex justify-between mb-24">
+    {traitsData.map((data) => (
+        <div class="max-w-[379px] flex items-start space-x-4">
+            <Image src={data.logoUrl} alt="logo" width={34} height={34} class="p-1"/>
+            <div class="flex flex-col items-start">
+                <CustomPageTitle 
+                    title={data.title}
+                    textSize="text-2xl"
+                />
+                <p class="text-base font-normal text-[#909090] leading-normal mt-3">{data.description}</p>
+            </div>
+        </div>
+    ))}
+</div>

@@ -1,18 +1,43 @@
 ---
-import { Image } from "astro:assets";
+const Position = {
+  RELATIVE: 'relative',
+  ABSOLUTE: 'absolute',
+  STATIC: 'static',
+} as const
+
+type PositionType = (typeof Position)[keyof typeof Position]
 
 interface Props {
-    imageSource: string
-    text: string
+  imageSource: string
+  text: string
+  position: PositionType
+  extendedClass?: string
 }
 
-const { imageSource, text } = Astro.props
+const { imageSource, text, position, extendedClass } = Astro.props
 ---
 
-<div class="flex space-x-1 px-3 py-2 rounded-xl bg-gradient-to-b from-[#3E3E3E] to-[#343434] 
-    [box-shadow:inset_0px_-4px_4px_rgba(14,14,14,0.5),inset_0px_1px_1px_rgba(255,255,255,0.4)]">
+<div class={`${position} ${extendedClass} stack-box flex space-x-1 px-3 py-2 rounded-xl bg-gradient-to-b from-[#3E3E3E] to-[#343434] [box-shadow:inset_0px_-4px_4px_rgba(14,14,14,0.5),inset_0px_1px_1px_rgba(255,255,255,0.4)]`}>
     <img src={imageSource} alt="Stackbox logo"/>
     <p class="text-2xl font-semibold bg-gradient-to-b from-[#F6F6F6] to-[#909090] text-transparent bg-clip-text [text-shadow:0px_1px_2px_rgba(13,13,13,0.4)]">
         {text}
     </p>
 </div>
+<script>
+  import { animate } from "motion";
+
+  document.querySelectorAll(".stack-box").forEach((element) => {
+    const rotateMatch = element.className.match(/-?rotate-\[(\d+)deg\]/) || element.className.match(/-?rotate-(\d+)/);
+
+    let rotateDegree = rotateMatch ? parseInt(rotateMatch[1]) : 0;
+    
+    if (element.className.includes("-rotate")) {
+      rotateDegree = -rotateDegree;
+    }
+
+    animate(element, 
+      { scale: [0.1, 1], rotate: [rotateDegree, rotateDegree] }, 
+      { ease: "circInOut", duration: 1 }
+    )
+  })
+</script>
