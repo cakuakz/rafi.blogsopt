@@ -23,11 +23,15 @@ const traitsData = [
     }
 ]
 ---
-<div class="flex justify-between mb-24">
+<div class="flex flex-col items-center md:flex-row justify-between">
     {traitsData.map((data) => (
-        <div class="max-w-[379px] flex items-start space-x-4">
-            <Image src={data.logoUrl} alt="logo" width={34} height={34} class="p-1"/>
-            <div class="flex flex-col items-start">
+        <div class="max-w-[379px] mb-24 flex items-start space-x-4">
+            <div class="p-[0.5px] w-14 h-14 rounded-lg bg-gradient-to-b from-[#464646] to-[#2C2C2C] bg-clip-border">
+                <div class="bg-[#282828] flex justify-center bg-opacity-70 w-full h-full rounded-lg shadow-[inset_2px_4px_16px_rgba(248,248,248,0.06)]">
+                    <Image src={data.logoUrl} alt="logo" width={34} height={34}/>
+                </div>
+            </div>
+            <div class="flex flex-col items-start max-w-[311px]">
                 <CustomPageTitle 
                     title={data.title}
                     textSize="text-2xl"
