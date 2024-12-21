@@ -18,14 +18,14 @@ const { title, description, imgUrl, tags, href, duration } = Astro.props
 <div class="justify-self-center" data-post data-tags={JSON.stringify(tags)}>
     <a href={href}>
         <div 
-            class="flex flex-col border border-[#242424] bg-[#1C1C1C] rounded-sm cursor-pointer w-[430px] h-[436px]"
+            class="flex flex-col border border-[#242424] bg-[#1C1C1C] rounded-sm cursor-pointer max-w-[430px] max-h-[436px] w-full h-full"
         >
             <CldImage 
                 src={imgUrl || "https://res.cloudinary.com/rafirfansyah/image/upload/v1731826909/React_Image_s6nsdn.png"}
                 width={430}
                 height={234}
                 alt="Blog Image"
-                class="image-style"
+                class="image-style h-full"
             />
             <div
                 class="p-4 flex flex-col justify-start"

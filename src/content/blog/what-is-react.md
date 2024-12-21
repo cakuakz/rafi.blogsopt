@@ -8,8 +8,12 @@ duration: 5 Minutes
 ---
 
 ## Introduction
+<div class="mb-6"></div>
 
-<div class="mb-3"></div>
-
-HTML, CSS, dan Javascript, adalah tiga elemen penting yang menjadi pondasi dalam pembuatan sebuah website. Tiga elemen ini memiliki perannya masing - masing dalam proses pembuatan website. Untuk membuat kerangka atau struktur dasar dari sebuah website, HTML memiliki peran penting dalam hal ini. Tapi, HTML saja belum cukup karena website yang hanya terdiri dari kerangka saja tidak akan dapat membantu pengguna mendapatkan informasi yang mereka butuhkan. Nah, CSS hadir untuk memberi keindahan pada setiap elemen yang ada di dalam struktur HTML, dan Javascript akan memberikan "sentuhan akhir" agar website menjadi lebih interaktif.
-<div class="mb-4"></div>
+### What about React?
+<div class="mb-2"></div>
+Sebenarnya React.js ini apa sih?, Disini akan saya berikan pengertian React.js dari dua perspektif, yaitu dari perspektif subjektif saya dan perspektif objectif sesuai 
+dengan pengertian React.js itu sendiri. Menurut saya, React.js adalah sebuah "Kebebasan" yang ditawarkan oleh Jordan Walke pada tahun 2013 yang akhirnya membawa perubahan 
+besar dalam pembuatan aplikasi di zaman sekarang, terutama dampak baiknya bagi seorang software engineer seperti saya. Disamping itu, React.js jika dijelaskan secara objektif 
+merupakan <span class="font-bold underline underline-offset-1">library</span> dari javascript yang dapat memudahkan pembuatan software dengan menawarkan beberapa fitur 
+yang tidak bisa atau susah didapatkan jika menggunakan vanilla Javascript.

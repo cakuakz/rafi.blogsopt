@@ -14,5 +14,12 @@ import sitemap from '@astrojs/sitemap';
 // https://astro.build/config
 export default defineConfig({
   site: process.env.SITE_URL || 'http://localhost:4321',
-  integrations: [tailwind(), icon(), mdx(), react(), sitemap()]
+  integrations: [tailwind(), icon(), mdx(), react(), sitemap()],
+  vite: {
+    css: {
+      preprocessorOptions: {
+        scss: {},
+      },
+    },
+  },
 });
