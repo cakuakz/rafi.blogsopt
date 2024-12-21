@@ -23,21 +23,34 @@ const traitsData = [
     }
 ]
 ---
-<div class="flex flex-col items-center md:flex-row justify-between">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12">
     {traitsData.map((data) => (
-        <div class="max-w-[379px] mb-24 flex items-start space-x-4">
-            <div class="p-[0.5px] w-14 h-14 rounded-lg bg-gradient-to-b from-[#464646] to-[#2C2C2C] bg-clip-border">
-                <div class="bg-[#282828] flex justify-center bg-opacity-70 w-full h-full rounded-lg shadow-[inset_2px_4px_16px_rgba(248,248,248,0.06)]">
-                    <Image src={data.logoUrl} alt="logo" width={34} height={34}/>
+        <div class="w-full max-w-[379px] mx-auto mb-8 md:mb-0">
+            <div class="flex items-start space-x-4 content-traits">
+                <div class="flex-shrink-0 p-[0.5px] w-14 h-14 rounded-lg bg-gradient-to-b from-[#464646] to-[#2C2C2C] bg-clip-border">
+                    <div class="bg-[#282828] flex justify-center bg-opacity-70 w-14 h-14 rounded-lg shadow-[inset_2px_4px_16px_rgba(248,248,248,0.06)]">
+                        <Image src={data.logoUrl} alt="logo" width={34} height={34}/>
+                    </div>
                 </div>
-            </div>
-            <div class="flex flex-col items-start max-w-[311px]">
-                <CustomPageTitle 
-                    title={data.title}
-                    textSize="text-2xl"
-                />
-                <p class="text-base font-normal text-[#909090] leading-normal mt-3">{data.description}</p>
+                <div class="flex flex-col items-start">
+                    <CustomPageTitle 
+                        title={data.title}
+                        textSize="text-xl sm:text-2xl"
+                    />
+                    <p class="text-sm sm:text-base font-normal text-[#909090] leading-normal mt-3">{data.description}</p>
+                </div>
             </div>
         </div>
     ))}
 </div>
+<script>
+    import { animate, stagger, inView } from "motion";
+
+    const traitContent = document.querySelectorAll('.content-traits')
+
+    traitContent.forEach((element) => {
+        inView(element, (info) => {
+            animate(info.target, { opacity: [0.1, 1], y: [100, 0] }, { delay: stagger(0.2)})
+        })
+    })
+</script>

@@ -3,8 +3,8 @@ import CustomPageTitle from "@components/CustomPageTitle.astro"
 import CustomInput from "@components/CustomInput.astro"
 import MainLayout from "@layouts/MainLayout.astro"
 import BlogCard from "@components/blog/BlogCard.astro"
-import { getCollection } from "astro:content"
 import ButtonBlogTags from "@components/blog/ButtonBlogTags"
+import { getCollection } from "astro:content"
 
 const posts = (await getCollection('blog')).sort(
     (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
@@ -21,33 +21,41 @@ const tags = Array.from(
     title="Index"
     description="Index Example"
 >
-    <div class="flex flex-col px-20 pb-72 pt-14 justify-center">
-        <div class="flex flex-col mb-11">
+    <div class="flex flex-col px-4 sm:px-8 md:px-12 lg:px-20 pb-20 sm:pb-32 lg:pb-72 pt-8 lg:pt-14 justify-center">
+        <div class="flex flex-col mb-6 sm:mb-8 lg:mb-11 title-section">
             <CustomPageTitle 
                 title="Blog"
             />
-            <p class="text-base font-normal text-[#7E7E7E]">Discover process behind every project</p>
+            <p class="text-sm sm:text-base font-normal text-[#7E7E7E]">Discover process behind every project</p>
         </div>
-        <div class="px-[431px]">
+        
+        {/* Search input with responsive padding */}
+        <div class="w-full px-0 sm:px-12 md:px-24 lg:px-[200px] xl:px-[431px]">
             <CustomInput 
                 placeholder="Search Input"
                 iconName="mingcute:search-2-line"
                 iconClassname="w-4 text-[#83868A] ml-3"
             />
         </div>
+
         <div id="blog-container">
-            <div class="flex items-center justify-center mt-10 space-x-4">
-                <p class="text-sm font-normal text-[#515457]">Choose topic</p>
-                {tags.map((tag) => (
-                    <ButtonBlogTags 
-                        tag={tag}
-                        isSelected={false}
-                        onTagClick={() => {}}
-                        client:load
-                    />
-                ))}
+            {/* Tags section with horizontal scroll on mobile */}
+            <div class="mt-6 sm:mt-8 lg:mt-10 overflow-x-auto pb-4 sm:pb-0">
+                <div class="flex items-center space-x-4 min-w-max sm:justify-center">
+                    <p class="text-xs sm:text-sm font-normal text-[#515457] whitespace-nowrap">Choose topic</p>
+                    {tags.map((tag) => (
+                        <ButtonBlogTags 
+                            tag={tag}
+                            isSelected={false}
+                            onTagClick={() => {}}
+                            client:load
+                        />
+                    ))}
+                </div>
             </div>
-            <div class="mt-28 grid lg:grid-cols-3 md:grid-cols-2 gap-y-12 gap-x-3">
+
+            {/* Blog grid with responsive columns */}
+            <div class="mt-12 sm:mt-16 lg:mt-28 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-y-8 sm:gap-y-12 gap-x-3">
                 {posts.map((item) => (
                     <BlogCard 
                         title={item.data.title}
@@ -64,11 +72,18 @@ const tags = Array.from(
 </MainLayout>
 
 <script>
+    import { animate, spring } from "motion"
+
     let selectedTag: string | null = null
     const blogContainer = document.getElementById('blog-container')
     const searchInput = document.querySelector('input')
     const posts = Array.from(blogContainer?.querySelectorAll('[data-post]') || [])
     const buttons = Array.from(document.querySelectorAll('button'))
+
+    const titleSections = document.querySelectorAll(".title-section")
+    titleSections.forEach((element) => {
+        animate(element, { opacity: [0, 1], transform: ['translateX(-30px)', 'translateX(0px)']}, { type: spring, bounce: 0.5, duration: 0.7 })
+    })
 
     function filterPosts() {
         const searchText = (searchInput?.value || "").toLowerCase()

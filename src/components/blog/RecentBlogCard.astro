@@ -1,0 +1,29 @@
+---
+import { CldImage } from "astro-cloudinary";
+
+interface Props {
+    title: string
+    description: string
+    imgUrl?: string
+    href: string
+}
+
+const { title, description, imgUrl, href } = Astro.props
+---
+<div class="bg-gradient-to-t from-[#181818] to-[#2C2C2C] bg-clip-border p-[1.5px] shadow-inner rounded-lg w-full h-[310px]">
+    <div class="flex flex-col bg-[#282828] bg-opacity-70 rounded-lg h-full">
+        <a href={href}>
+            <CldImage 
+                src={imgUrl || ""}
+                alt="Blog Card"
+                width={430}
+                height={234}
+                class="rounded-t-lg "
+            />
+            <div class="flex flex-col py-5 px-4 items-start text-start w-full h-full space-y-1">
+                <p class="text-sm font-semibold text-[#F6F6F6]">{title}</p>
+                <p class="text-sm font-normal text-[#858585]">{description}</p>
+            </div>
+        </a>
+    </div>
+</div>

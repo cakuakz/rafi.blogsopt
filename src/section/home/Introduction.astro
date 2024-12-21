@@ -16,7 +16,7 @@ import StackBox from "@components/StackBox.astro"
         text="Javascript"
         imageSource="/assets/icons/javascript_stackbox_svg.svg"
         position="absolute"
-        extendedClass="bottom-8 right-[124px] rotate-2"
+        extendedClass="top-[700px] right-[124px] rotate-2"
     />
     <StackBox 
         text="Next.js"
@@ -36,19 +36,22 @@ import StackBox from "@components/StackBox.astro"
         position="absolute"
         extendedClass="top-[481px] left-[88px] -rotate-[4deg]"
     />
-    <CustomPageTitle 
-        title="Building digital experiences that leave a mark on the world."
-        textSize="text-[64px]"
-    />
-    <p class="text-[#909090] font-medium text-xl mt-2 mb-14">Hey, I'm Rafi, crafting the web with passion and precision</p>
-    <div class="flex items-center justify-center space-x-1">
-        <HomeButton 
-            text="Read my blog"
+    <div class="title-section">
+        <CustomPageTitle 
+            title="Building digital experiences that leave a mark on the world."
+            textSize="text-[64px]"
         />
-        <button class="rounded-[10px] text-[#A2A2A2] text-lg font-medium bg-[#161616] px-8 py-3">
-            My Resume
-        </button>
+        <span class="flex items-center space-x-3 justify-center mt-2 mb-14">
+            <img src="/assets/icons/waving_hand.svg" alt=""/>
+            <p class="text-[#909090] font-medium text-xl">Hey, I'm Rafi, crafting the web with passion and precision</p>
+        </span>
+        <div class="flex items-center justify-center space-x-1">
+            <HomeButton 
+                text="Read my blog"
+            />
+            <button class="rounded-[10px] text-[#A2A2A2] text-lg font-medium hover:-translate-y-1 transform duration-200 bg-[#161616] px-8 py-3">
+                My Resume
+            </button>
+        </div>
     </div>
 </div>
-<style>
-</style>

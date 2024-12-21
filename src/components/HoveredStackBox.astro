@@ -1,0 +1,35 @@
+---
+import StackBox from './StackBox.astro'
+
+interface Props {
+    title: string
+    description: string
+    imageSource: string
+}
+
+const { title, description, imageSource } = Astro.props
+---
+<div class="tooltip-container relative">
+    <div class="cursor-pointer">
+        <StackBox 
+            imageSource={imageSource}
+        />
+    </div>
+
+    <div class="tooltip absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 z-50 opacity-0 invisible translate-y-2 p-3 bg-[#272727] text-white text-sm rounded-lg shadow-md min-w-[367px] min-h-[208px] transition-all duration-300">
+        <div class="h-full flex flex-col">
+            <p class="text-xl font-normal text-[#F6F6F6] break-words mb-3 line-clamp-1">{title}</p>
+            <p class="text-xl font-formal text-[#969696] break-words line-clamp-6">{description}</p>
+        </div>
+
+        <div class="absolute bottom-[-8px] left-1/2 transform -translate-x-1/2 w-4 h-4 rotate-45 bg-[#272727]"></div>
+    </div>
+</div>
+
+<style>
+    .tooltip-container:hover .tooltip {
+        opacity: 1;
+        visibility: visible;
+        transform: translateX(-50%) translateY(0);
+    }
+</style>

@@ -1,0 +1,28 @@
+---
+import CustomPageTitle from './CustomPageTitle.astro';
+
+interface Props {
+  title: string;
+  image: string;
+}
+
+const { title, image } = Astro.props;
+---
+
+<div class="relative group">
+  <div class="flex justify-center items-center overflow-hidden">
+    <div class="relative rounded-lg max-w-[596px] min-h-[392px] overflow-hidden">
+      <img 
+        src={image} 
+        alt={title}
+        class="max-w-[596px] min-h-[392px] w-full h-full saturate-0 object-cover transition-all duration-300 scale-105 ease-in-out group-hover:scale-100 group-hover:blur-sm rounded-lg"
+      />
+      <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+        <CustomPageTitle 
+            title={title}
+        />
+      </div>
+      <div class="absolute inset-0 bg-black opacity-0 group-hover:opacity-40 transition-opacity duration-300"></div>
+    </div>
+  </div>
+</div>

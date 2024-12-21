@@ -1,14 +1,15 @@
 ---
-
 ---
-<nav class="flex justify-between px-20 py-6 border-b border-b-[#282828]">
-    <ul class="flex space-x-6 text-white items-center">
-        {['Home', 'About', 'Blog'].map((item, index) => {
+
+<nav id="navbar" class="sticky top-0 z-50 flex justify-center lg:justify-between items-center px-4 md:px-8 lg:px-20 py-4 md:py-6 border-b border-b-[#282828] bg-[#161616] transition-transform duration-300 ease-in-out">
+    <!-- Navigation Links -->
+    <ul class="flex space-x-4 md:space-x-6 text-white items-center">
+        {['Home', 'About', 'Blog', 'Projects'].map((item, index) => {
             const link = item === 'Home' ? '/' : `/${item.toLowerCase()}`;
             const isActive = Astro.url.pathname === link;
             return (
                 <li 
-                    class={`text-sm font-normal px-3 py-2 rounded-xl cursor-pointer ${
+                    class={`text-sm md:text-base font-normal px-3 py-2 rounded-xl cursor-pointer ${
                         isActive ? 'bg-[#1C1C1C]' : ''
                     }`}
                     tabindex={index}
@@ -18,8 +19,71 @@
             );
         })}
     </ul>
-    <img 
-        src="/assets/MMRI.svg"
-        alt="Blog Logo"
-    />
+
+    <!-- Logo -->
+    <a href="/" class="hidden lg:block">
+        <img 
+            src="/assets/MMRI.svg"
+            alt="Blog Logo"
+            class="blog-logo w-10 md:w-12 lg:w-auto"
+        />
+    </a>
 </nav>
+
+<script>
+    import { animate, spring } from "motion"
+
+    // Animate logo on hover
+    const logo = document.querySelectorAll(".blog-logo")
+
+    logo.forEach(button => {
+        button.addEventListener('mouseenter', () => {
+            animate(button, { scale: 1.2 }, { type: spring, stiffness: 200 })
+        })
+
+        button.addEventListener('mouseleave', () => {
+            animate(button, { scale: 1 }, { type: spring, stiffness: 200 })
+        })
+    })
+
+    // Navbar scroll effect
+    let lastScrollY = window.scrollY;
+    const navbar = document.getElementById('navbar');
+
+    window.addEventListener('scroll', () => {
+        const currentScrollY = window.scrollY;
+
+        if (navbar) {
+            if (currentScrollY === 0) {
+                navbar.style.transform = 'translateY(0)';
+            } else if (currentScrollY > lastScrollY) {
+                // Hide navbar when scrolling down
+                navbar.style.transform = 'translateY(-100%)';
+            } else {
+                // Show navbar when scrolling up
+                navbar.style.transform = 'translateY(0)';
+            }
+        }
+
+        lastScrollY = currentScrollY;
+    })
+</script>
+
+<style>
+    /* Style adjustments for the responsive navbar */
+    .blog-logo {
+        width: 40px; /* Default logo width for mobile */
+    }
+
+    @media (min-width: 768px) {
+        .blog-logo {
+            width: 48px; /* Medium screen adjustments */
+        }
+    }
+
+    @media (min-width: 1024px) {
+        .blog-logo {
+            width: auto; /* Full size on large screens */
+        }
+    }
+</style>
