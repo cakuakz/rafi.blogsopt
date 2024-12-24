@@ -1,0 +1,50 @@
+---
+interface Props {
+  likes: number;
+  slug: string;
+}
+
+const { likes, slug } = Astro.props;
+---
+
+<button class="like-button" data-slug={slug}>
+  ❤️ {likes} likes
+</button>
+
+<style>
+  .like-button {
+    background: #ff4b6e;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+
+  .like-button:hover {
+    background: #ff2d56;
+  }
+</style>
+
+<script>
+  function setupLikeButton(button: HTMLButtonElement) {
+    button.addEventListener('click', async () => {
+      const slug = button.getAttribute('data-slug');
+      const response = await fetch(`/api/likes/${slug}`, {
+        method: 'POST'
+      });
+      
+      if (response.ok) {
+        const { likes } = await response.json();
+        button.textContent = `❤️ ${likes} likes`;
+      }
+    });
+  }
+
+  document.querySelectorAll('.like-button').forEach(button => {
+    if (button instanceof HTMLButtonElement) {
+      setupLikeButton(button);
+    }
+  });
+</script>

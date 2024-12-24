@@ -11,10 +11,13 @@ import react from '@astrojs/react';
 
 import sitemap from '@astrojs/sitemap';
 
+import db from '@astrojs/db';
+
 // https://astro.build/config
 export default defineConfig({
   site: process.env.SITE_URL || 'http://localhost:4321',
-  integrations: [tailwind(), icon(), mdx(), react(), sitemap()],
+  integrations: [tailwind(), icon(), mdx(), react(), sitemap(), db()],
+  output: 'hybrid',
   vite: {
     css: {
       preprocessorOptions: {

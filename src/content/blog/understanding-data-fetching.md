@@ -5,6 +5,7 @@ pubDate: 2024-12-01
 heroImage: 632558bac3690972f2e9bf90_database-light_ndhlzs
 tags: ['data-fetch', 'nextjs', 'frontend']
 duration: 10 Minutes
+likes: 0
 ---
 
 ## Introduction

@@ -5,6 +5,7 @@ pubDate: Nov 23 2024
 heroImage: React_Image_s6nsdn.png
 tags: ['javascript', 'reactjs']
 duration: 5 Minutes
+likes: 0
 ---
 
 ## Introduction
