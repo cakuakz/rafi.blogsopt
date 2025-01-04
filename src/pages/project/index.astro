@@ -1,0 +1,76 @@
+---
+import CustomPageTitle from "@components/CustomPageTitle.astro"
+import MainLayout from "@layouts/MainLayout.astro"
+import { getCollection } from "astro:content"
+import ProjectPageCard from "@components/ProjectPageCard.astro"
+
+const posts = (await getCollection('project')).sort(
+    (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+)
+---
+
+<MainLayout
+    title="Projects"
+    description="Project Index Page"
+>
+    <div class="flex flex-col px-4 sm:px-8 md:px-12 lg:px-20 pb-20 sm:pb-32 lg:pb-72 pt-8 lg:pt-14 justify-center blog-index-container">
+        <div class="flex flex-col text-center items-center mb-6 sm:mb-8 lg:mb-11 title-section blog-index-child">
+            <CustomPageTitle 
+                title="Featured Projects"
+            />
+            <p class="text-sm sm:text-base font-normal mt-2 text-[#7E7E7E]">Some of my works that i want to share</p>
+        </div>
+
+        <div class="mt-12 sm:mt-16 lg:mt-28 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-y-8 sm:gap-y-12 gap-x-3 blog-index-child">
+            {posts.map((item) => {
+                return (
+                    <ProjectPageCard 
+                        title={item.data.title}
+                        description={item.data.description}
+                        href={`/project/${item.slug}/`}
+                        iconStackName={item.data.techStack}
+                        projectUrl={item.data.projectUrl}
+                    />
+                  );
+            })}
+        </div>
+    </div>
+</MainLayout>
+
+<script>
+    import { animate, spring, stagger } from "motion"
+
+    const titleSections = document.querySelectorAll(".title-section")
+    titleSections.forEach((element) => {
+        animate(
+            element, 
+            { 
+                opacity: [0, 1], 
+                transform: ['translateX(-30px)', 'translateX(0px)']
+            }, 
+            { 
+                type: spring, 
+                bounce: 0.5, 
+                duration: 0.7 
+            }
+        )
+    })
+
+    document.addEventListener("DOMContentLoaded", () => {
+    const blogChildren = document.querySelectorAll(".blog-index-child");
+
+    animate(blogChildren, 
+        { 
+            opacity: [0, 1], 
+            transform: ['translateY(30px)', 'translateY(0px)'] 
+        }, 
+        { 
+            delay: stagger(0.1),
+            type: spring, 
+            bounce: 0.5, 
+            duration: 0.7 
+        }
+        );
+    });
+
+</script>

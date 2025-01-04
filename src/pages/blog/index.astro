@@ -5,36 +5,37 @@ import MainLayout from "@layouts/MainLayout.astro"
 import BlogCard from "@components/blog/BlogCard.astro"
 import ButtonBlogTags from "@components/blog/ButtonBlogTags"
 import { getCollection } from "astro:content"
-import { getAllPosts } from "@utils/db/posts"
-import { getLikesForPost } from "@utils/db/likes"
 
-// const posts = (await getCollection('blog')).sort(
-//     (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
-// )
-
-const posts = await getAllPosts()
+const posts = (await getCollection('blog')).sort(
+    (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+)
 
 const tags = Array.from(
     new Set(
         posts.flatMap(post => post.data.tags || [])
     )
 )
+
+const imagesUrl = Array.from(
+    new Set(
+        posts.flatMap(post => post.data.heroImage || [])
+    )
+)
 ---
 
 <MainLayout
-    title="Index"
-    description="Index Example"
+    title="Blogs"
+    description="Blog Index Page"
 >
-    <div class="flex flex-col px-4 sm:px-8 md:px-12 lg:px-20 pb-20 sm:pb-32 lg:pb-72 pt-8 lg:pt-14 justify-center">
-        <div class="flex flex-col mb-6 sm:mb-8 lg:mb-11 title-section">
+    <div class="flex flex-col px-4 sm:px-8 md:px-12 lg:px-20 pb-20 sm:pb-32 lg:pb-72 pt-8 lg:pt-14 justify-center blog-index-container">
+        <div class="flex flex-col items-center text-center mb-6 sm:mb-8 lg:mb-11 title-section blog-index-child">
             <CustomPageTitle 
                 title="Blog"
             />
             <p class="text-sm sm:text-base font-normal text-[#7E7E7E]">Discover process behind every project</p>
         </div>
         
-        {/* Search input with responsive padding */}
-        <div class="w-full px-0 sm:px-12 md:px-24 lg:px-[200px] xl:px-[431px]">
+        <div class="w-full px-0 sm:px-12 md:px-24 lg:px-[200px] xl:px-[431px] blog-index-child">
             <CustomInput 
                 placeholder="Search Input"
                 iconName="mingcute:search-2-line"
@@ -43,8 +44,7 @@ const tags = Array.from(
         </div>
 
         <div id="blog-container">
-            {/* Tags section with horizontal scroll on mobile */}
-            <div class="mt-6 sm:mt-8 lg:mt-10 overflow-x-auto pb-4 sm:pb-0">
+            <div class="mt-6 sm:mt-8 lg:mt-10 overflow-x-auto pb-4 sm:pb-0 blog-index-child">
                 <div class="flex items-center space-x-4 min-w-max sm:justify-center">
                     <p class="text-xs sm:text-sm font-normal text-[#515457] whitespace-nowrap">Choose topic</p>
                     {tags.map((tag) => (
@@ -58,14 +58,12 @@ const tags = Array.from(
                 </div>
             </div>
 
-            {/* Blog grid with responsive columns */}
-            <div class="mt-12 sm:mt-16 lg:mt-28 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-y-8 sm:gap-y-12 gap-x-3">
+            <div class="mt-12 sm:mt-16 lg:mt-28 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-y-8 sm:gap-y-12 gap-x-3 blog-index-child">
                 {posts.map((item) => {
                   return (
                     <BlogCard
                       title={item.data.title}
                       description={item.data.description}
-                      imgUrl={item.data?.heroImage}
                       tags={item.data.tags}
                       href={`/blog/${item.slug}/`}
                       duration={item.data.duration}
@@ -78,7 +76,41 @@ const tags = Array.from(
 </MainLayout>
 
 <script>
-    import { animate, spring } from "motion"
+    import { animate, spring, stagger } from "motion"
+
+    const titleSections = document.querySelectorAll(".title-section")
+    titleSections.forEach((element) => {
+        animate(
+            element, 
+            { 
+                opacity: [0, 1], 
+                transform: ['translateX(-30px)', 'translateX(0px)']
+            }, 
+            { 
+                type: spring, 
+                bounce: 0.5, 
+                duration: 0.7 
+            }
+        )
+    })
+
+    document.addEventListener("DOMContentLoaded", () => {
+    const blogChildren = document.querySelectorAll(".blog-index-child");
+
+    animate(blogChildren, 
+        { 
+            opacity: [0, 1], 
+            transform: ['translateY(30px)', 'translateY(0px)'] 
+        }, 
+        { 
+            delay: stagger(0.1),
+            type: spring, 
+            bounce: 0.5, 
+            duration: 0.7 
+        }
+        );
+    });
+
 
     let selectedTag: string | null = null
     const blogContainer = document.getElementById('blog-container')
@@ -86,10 +118,18 @@ const tags = Array.from(
     const posts = Array.from(blogContainer?.querySelectorAll('[data-post]') || [])
     const buttons = Array.from(document.querySelectorAll('button'))
 
-    const titleSections = document.querySelectorAll(".title-section")
-    titleSections.forEach((element) => {
-        animate(element, { opacity: [0, 1], transform: ['translateX(-30px)', 'translateX(0px)']}, { type: spring, bounce: 0.5, duration: 0.7 })
-    })
+    function updateButtonStyles() {
+        buttons.forEach((button) => {
+            const buttonTag = button.querySelector('p')?.textContent
+            if (buttonTag === selectedTag) {
+                button.classList.add('text-[#F6F6F6]', 'bg-[#2E2F2F]')
+                button.classList.remove('opacity-50');
+            } else {
+                button.classList.remove('text-[#F6F6F6]', 'bg-[#2E2F2F]')
+                button.classList.add('opacity-50')
+            }
+        });
+    }
 
     function filterPosts() {
         const searchText = (searchInput?.value || "").toLowerCase()
@@ -108,18 +148,9 @@ const tags = Array.from(
             } else {
                 postElement?.classList.add('hidden')
             }
-        })
+        });
 
-        buttons.forEach((button) => {
-            const buttonTag = button.querySelector('p')?.textContent
-            if (buttonTag === selectedTag) {
-                button.classList.add('text-[#F6F6F6]', 'bg-[#2E2F2F]')
-                button.classList.remove('opacity-50')
-            } else {
-                button.classList.remove('text-[#F6F6F6]', 'bg-[#2E2F2F]')
-                button.classList.add('opacity-50')
-            }
-        })
+        updateButtonStyles()
     }
 
     buttons.forEach((button) => {
@@ -127,10 +158,8 @@ const tags = Array.from(
             const tag = button.querySelector('p')?.textContent || null
             selectedTag = selectedTag === tag ? null : tag
             filterPosts()
-        })
-    })
+        });
+    });
 
-    searchInput?.addEventListener('input', () => {
-        filterPosts()
-    })
+    searchInput?.addEventListener('input', filterPosts)
 </script>

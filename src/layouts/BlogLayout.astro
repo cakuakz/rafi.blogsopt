@@ -1,14 +1,13 @@
 ---
 import BaseHead from '@components/BaseHead.astro';
 import BlogTag from '@components/blog/BlogTag.astro';
-import LikeButton from '@components/blog/LikeButton.astro';
+import Comments from '@components/blog/Comments.astro';
 import TableOfContent from '@components/blog/TableOfContent.astro';
 import CustomPageTitle from '@components/CustomPageTitle.astro';
 import Footer from '@components/Footer.astro';
 import FormattedDate from '@components/FormattedDate.astro';
 import Navbar from '@components/Navbar.astro';
 import '@fontsource-variable/inter';
-import { Icon } from 'astro-icon/components';
 import type { CollectionEntry } from 'astro:content';
 
 type Props = CollectionEntry<'blog'>['data'] & {
@@ -20,7 +19,7 @@ type Props = CollectionEntry<'blog'>['data'] & {
     slug: string;
 }
 
-const { title, description, pubDate, updatedDate, tags, headings, duration, likes, slug } = Astro.props;
+const { title, description, pubDate, updatedDate, tags, headings, duration, } = Astro.props;
 ---
 
 <!doctype html>
@@ -34,11 +33,11 @@ const { title, description, pubDate, updatedDate, tags, headings, duration, like
             <article>
                 <img src="/assets/radial_pattern_bg.svg" alt="Radial Bg" class="absolute top-0 left-0 opacity-30 z-[-1]" />
                 <div class="flex flex-col px-20 py-24 relative">
-                    <CustomPageTitle textSize="text-[4.5rem]" title={title} />
+                    <CustomPageTitle textSize="text-[4.5rem]" title={title} className='title-section'/>
                     <div class="flex">
                         <div class="flex flex-col">
                             <div class="flex flex-col space-y-16">
-                                <p class="text-[#F6F6F6] font-light text-lg pr-7">{description}</p>
+                                <p class="text-[#F6F6F6] font-light text-lg pr-7 title-section">{description}</p>
                                 <div class="flex items-center">
                                     <div class="pr-7 border-r-[0.5px] border-r-white">
                                         <FormattedDate date={pubDate} />
@@ -70,8 +69,8 @@ const { title, description, pubDate, updatedDate, tags, headings, duration, like
                         </div>
                     </div>
                 </div>
-                <div class="flex p-3 items-center space-x-3">
-                    <LikeButton likes={likes} slug={slug} />
+                <div class="flex justify-center px-20 py-4 mb-7 items-center border-t border-[#272727]">
+                    <Comments />
                 </div>
             </article>
         </main>
@@ -131,66 +130,23 @@ const { title, description, pubDate, updatedDate, tags, headings, duration, like
         transform: scale(0.9);
         transition: transform 0.2s ease;
     }
-
-    .heart-fly-animation {
-        position: relative;
-        overflow: visible;
-        width: 0;
-        height: 0;
-    }
-
-    .flying-heart {
-        position: absolute;
-        left: 50%;
-        top: 50%;
-        width: 16px;
-        height: 16px;
-        background-color: red;
-        mask: url('/assets/icons/heart_logo.svg') no-repeat center / contain;
-        -webkit-mask: url('/assets/icons/heart_logo.svg') no-repeat center / contain;
-        animation: fly-up 1s ease-in-out forwards;
-    }
-
-    @keyframes fly-up {
-        0% {
-            transform: translate(-50%, 0) scale(1);
-            opacity: 1;
-        }
-        50% {
-            transform: translate(-50%, -50%) scale(1.2);
-            opacity: 0.7;
-        }
-        100% {
-            transform: translate(-50%, -100px) scale(0.8);
-            opacity: 0;
-        }
-    }
 </style>
 <script>
-    // const iconButton = document.querySelector('.icon-button');
-    // const likesCount = document.querySelector('.likes-count');
-    // const heartFlyContainer = document.querySelector('.heart-fly-animation');
-    // let likes = parseInt(likesCount?.getAttribute('data-likes') || '0');
+    import { animate, spring } from "motion";
 
-    // if (iconButton && likesCount && heartFlyContainer) {
-    //     iconButton.addEventListener('click', () => {
-    //         likes++;
-    //         likesCount.textContent = `${likes} Likes`;
-    //         likesCount.setAttribute('data-likes', likes.toString());
-
-    //         iconButton.classList.add('shrink');
-    //         setTimeout(() => {
-    //             iconButton.classList.remove('shrink');
-    //         }, 200);
-
-    //         const flyingHeart = document.createElement('div');
-    //         flyingHeart.classList.add('flying-heart');
-    //         heartFlyContainer.appendChild(flyingHeart);
-
-    //         flyingHeart.addEventListener('animationend', () => {
-    //             flyingHeart.remove();
-    //         });
-    //     })
-    // }
+    const titleSections = document.querySelectorAll(".title-section");
+    titleSections.forEach((element) => {
+        animate(
+            element, 
+            { 
+                opacity: [0, 1], 
+                transform: ['translateX(-50px)', 'translateX(0px)']
+            }, 
+            { 
+                type: spring, 
+                bounce: 0.7, 
+                duration: 1.5 
+            }
+        );
+    })
 </script>
-

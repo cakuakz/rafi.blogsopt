@@ -1,6 +1,5 @@
 ---
 import BlogLayout from '@layouts/BlogLayout.astro';
-import { getLikesForPost } from '@utils/db/likes';
 import { type CollectionEntry, getCollection } from 'astro:content';
 
 export async function getStaticPaths() {
@@ -13,9 +12,8 @@ export async function getStaticPaths() {
 type Props = CollectionEntry<'blog'>;
 
 const post = Astro.props;
-const likes = await getLikesForPost(post.slug)
 const { Content, headings } = await post.render();
 ---
-<BlogLayout {...post.data} headings={headings} slug={post.slug} likes={likes}>
+<BlogLayout {...post.data} headings={headings} slug={post.slug}>
     <Content />
 </BlogLayout>

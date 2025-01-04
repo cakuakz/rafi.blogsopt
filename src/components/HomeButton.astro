@@ -1,23 +1,17 @@
 ---
 interface Props {
     text: string
+    fontSize?: string
+    className?: string
 }
 
-const { text } = Astro.props
+const { text, fontSize, className } = Astro.props
 ---
 <button
     type="button"
-    class="bg-gradient-to-b from-[#464646] to-[#2C2C2C] bg-clip-border p-[2px] hover:-translate-y-1 transform duration-200 rounded-[10px] homebutton"
+    class=`bg-gradient-to-b from-[#464646] to-[#2C2C2C] bg-clip-border p-[2px] hover:-translate-y-1 transform duration-200 rounded-[10px] ${className}`
 >
     <div class="bg-[#262626] px-8 py-3 border-2 border-transparent w-full h-full flex items-center justify-center rounded-lg">
-        <p class="text-[#F6F6F6] font-medium text-lg">{text}</p>
+        <p class=`text-[#F6F6F6] font-medium ${fontSize || 'text-lg'}`>{text}</p>
     </div>
 </button>
-<script>
-    const buttons = document.querySelectorAll('button.homebutton');
-    buttons.forEach((button) => {
-        button.addEventListener('click', () => {
-            location.replace('/blog')
-        });
-    })
-</script>

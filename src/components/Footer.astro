@@ -7,7 +7,7 @@ import IconLinkedin from "./icon-component/IconLinkedin.astro";
 <div class="flex flex-col bg-[#1D1D1D] px-4 md:px-16 lg:px-40 py-6 md:py-8">
     <nav class="flex flex-col md:flex-row-reverse md:justify-between items-center">
         <ul class="flex flex-wrap justify-center md:space-x-8 text-[#F6F6F6] items-center space-y-2 md:space-y-0">
-            {['Home', 'About', 'Blog', 'Projects'].map((item, index) => {
+            {['Home', 'About', 'Blog', 'Project'].map((item, index) => {
                 const link = item === 'Home' ? '/' : `/${item.toLowerCase()}`;
                 const isActive = Astro.url.pathname === link;
                 return (

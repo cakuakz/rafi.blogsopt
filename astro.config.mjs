@@ -13,11 +13,14 @@ import sitemap from '@astrojs/sitemap';
 
 import db from '@astrojs/db';
 
+import netlify from '@astrojs/netlify';
+
 // https://astro.build/config
 export default defineConfig({
   site: process.env.SITE_URL || 'http://localhost:4321',
   integrations: [tailwind(), icon(), mdx(), react(), sitemap(), db()],
-  output: 'hybrid',
+  output: 'static',
+  adapter: netlify(),
   vite: {
     css: {
       preprocessorOptions: {

@@ -1,7 +1,17 @@
 ---
 import HomeButton from "@components/HomeButton.astro";
 import ProjectCard from "@components/ProjectCard.astro";
+import { getCollection } from "astro:content";
 
+const posts = (await getCollection('project')).sort(
+    (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+)
+
+const recentProjects = Array.from(
+    new Set(
+        posts.slice(0, 5)
+    )
+)
 
 ---
 <div class="flex flex-col space-y-20 items-center text-center mt-48">
@@ -14,25 +24,16 @@ import ProjectCard from "@components/ProjectCard.astro";
         </p>
     </div>
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
-        <ProjectCard 
-            title="Kalma"
-            image="/assets/home/example_circular_pict.svg"
-        />
-        <ProjectCard 
-            title="JSB Agency"
-            image="/assets/home/example_circular_pict.svg"
-        />
-        <ProjectCard 
-            title="Monito"
-            image="/assets/home/example_circular_pict.svg"
-        />
-        <ProjectCard 
-            title="REGLA IFRS 9"
-            image="/assets/home/example_circular_pict.svg"
-        />
+        {recentProjects.map((item) => (
+            <ProjectCard 
+                title={item.data.title}
+                href={`/project/${item.slug}/`}
+            />
+        ))}
     </div>
     <HomeButton 
         text="See More"
+        className="project-button"
     />
 </div>
 <script>
@@ -40,5 +41,12 @@ import ProjectCard from "@components/ProjectCard.astro";
 
     inView(".title-section", (info) => {
         animate(info.target, { opacity: [0, 1], y: [100, 0] }, { duration: 0.9})
+    })
+
+    const buttons = document.querySelectorAll('button.project-button');
+    buttons.forEach((button) => {
+        button.addEventListener('click', () => {
+            location.replace('/project')
+        });
     })
 </script>

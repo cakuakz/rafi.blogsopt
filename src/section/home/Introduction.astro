@@ -48,6 +48,7 @@ import StackBox from "@components/StackBox.astro"
         <div class="flex items-center justify-center space-x-1">
             <HomeButton 
                 text="Read my blog"
+                className="homebutton"
             />
             <button class="rounded-[10px] text-[#A2A2A2] text-lg font-medium hover:-translate-y-1 transform duration-200 bg-[#161616] px-8 py-3">
                 My Resume
@@ -55,3 +56,11 @@ import StackBox from "@components/StackBox.astro"
         </div>
     </div>
 </div>
+<script>
+    const buttons = document.querySelectorAll('button.homebutton');
+    buttons.forEach((button) => {
+        button.addEventListener('click', () => {
+            location.replace('/blog')
+        });
+    })
+</script>
