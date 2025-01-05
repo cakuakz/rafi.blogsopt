@@ -8,7 +8,6 @@ techStack: [
     'lineicons:postgresql',
     'lineicons:typescript'
 ]
-projectUrl: https://rafirfansyah.netlify.app/
 ---
 
 ## Overview

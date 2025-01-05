@@ -8,7 +8,7 @@ techStack: [
     'lineicons:postgresql',
     'lineicons:typescript'
 ]
-projectUrl: https://rafirfansyah.netlify.app/
+projectUrl: https://github.com/cakuakz/JSB-Agency
 ---
 
 ## Overview

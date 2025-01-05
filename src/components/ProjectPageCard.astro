@@ -14,7 +14,6 @@ const { title, description, href, iconStackName, projectUrl } = Astro.props
 ---
 
 <div class="justify-self-center" data-post>
-    <a href={href}>
         <div class="relative flex flex-col border border-[#242424] bg-[#1C1C1C] rounded-sm max-w-[430px] w-full h-full">
             <div class="relative">
                 <Image
@@ -52,24 +51,65 @@ const { title, description, href, iconStackName, projectUrl } = Astro.props
                 <div class="flex items-center justify-between mt-auto">
                     <button
                         type="button"
-                        class="bg-gradient-to-b from-[#464646] to-[#2C2C2C] bg-clip-border p-[2px] rounded-[10px]"
+                        class="bg-gradient-to-b from-[#464646] to-[#2C2C2C] bg-clip-border p-[2px] rounded-[10px] about-project-button"
+                        data-href={href}
                     >
                         <div class="bg-[#262626] px-4 py-2 border-2 border-transparent flex items-center justify-center rounded-lg">
                             <p class="text-[#F6F6F6] font-medium text-[10px]">About The Project</p>
                         </div>
                     </button>
 
-                    <a href={projectUrl} class="flex items-center space-x-1 cursor-pointer">
-                        <Icon 
-                            name="mingcute:link-fill" 
-                            class="text-[#F6F6F6]" 
-                            width={12} 
-                            height={12} 
-                        />
-                        <p class="text-[10px] font-normal text-[#858585]">View Project</p>
+                    <a href={projectUrl ? projectUrl : '/404'}>
+                        <div class="links flex items-center space-x-1 cursor-pointer group">
+                            <Icon 
+                                name="mingcute:link-fill" 
+                                class="text-[#F6F6F6] transition-transform duration-300 ease-in-out group-hover:rotate-90" 
+                                width={12} 
+                                height={12} 
+                            />
+                            <p class="text-[10px] font-normal text-[#858585] border-b-0 border-b-[#F6F6F6] hover:border-b transition-opacity duration-100 ease-in-out group-hover:border-b">
+                                View Project
+                            </p>
+                        </div>                        
                     </a>
                 </div>
             </div>
         </div>
-    </a>
 </div>
+<style>
+    /* .links::after {
+        content: '';
+        background-color: #F6F6F6;
+        height: 1px;
+        width: 13%;
+        position: absolute;
+        right: 17px;
+        bottom: 24px;
+        border-radius: 10px;
+        transition: width 0.3s;
+    } */
+
+    /* .links:hover::after {
+        width: 18%;
+    }
+
+    .links:active::after {
+        width: 18%;
+    } */
+</style>
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const aboutProjectButtons = document.querySelectorAll("button.about-project-button")
+
+        aboutProjectButtons.forEach((button) => {
+            const htmlButton = button as HTMLElement
+            htmlButton.addEventListener("click", () => {
+                const href = htmlButton.dataset.href
+                if (href) {
+                    location.href = href
+                }
+            })
+        })
+    })
+</script>
+
