@@ -8,16 +8,17 @@ interface Props {
     href: string
     iconStackName: string[]
     projectUrl?: string
+    heroImage?: string
 }
 
-const { title, description, href, iconStackName, projectUrl } = Astro.props
+const { title, description, href, iconStackName, projectUrl, heroImage } = Astro.props
 ---
 
 <div class="justify-self-center" data-post>
         <div class="relative flex flex-col border border-[#242424] bg-[#1C1C1C] rounded-sm max-w-[430px] w-full h-full">
             <div class="relative">
                 <Image
-                    src="/assets/projects/project_placeholder.svg"
+                    src={heroImage ? heroImage : "/assets/projects/project_placeholder.svg"}
                     alt="Project placeholder"
                     width={430}
                     height={234}

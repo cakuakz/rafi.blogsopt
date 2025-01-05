@@ -58,7 +58,7 @@ const imagesUrl = Array.from(
                 </div>
             </div>
 
-            <!-- <div class="mt-12 sm:mt-16 lg:mt-28 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-y-8 sm:gap-y-12 gap-x-3 blog-index-child">
+            <div class="mt-12 sm:mt-16 lg:mt-28 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-y-8 sm:gap-y-12 gap-x-3 blog-index-child">
                 {posts.map((item) => {
                   return (
                     <BlogCard
@@ -67,14 +67,10 @@ const imagesUrl = Array.from(
                       tags={item.data.tags}
                       href={`/blog/${item.slug}/`}
                       duration={item.data.duration}
+                      imgUrl={item.data.heroImage}
                     />
                   );
                 })}
-            </div> -->
-            <div class="flex justify-center text-center mt-20">
-                <h1 class="text-[64px] font-semibold text-[#F6F6F6] mb-4">
-                    Under Construction!
-                </h1>
             </div>
         </div>
     </div>

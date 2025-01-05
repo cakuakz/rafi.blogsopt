@@ -4,10 +4,12 @@ description: 'An automation application for IFRS and PSAK.'
 pubDate: 2023-08-28
 endProjectDate: 2024-11-26
 techStack: [
-    'lineicons:flutter',
-    'lineicons:postgresql',
-    'lineicons:typescript'
+    'lineicons:nextjs',
+    'lineicons:typescript',
+    'lineicons:tailwindcss',
+    'simple-icons:dotnet'
 ]
+heroImage: https://res.cloudinary.com/rafirfansyah/image/upload/v1736096599/regla_mock_uc6vaj.svg
 ---
 
 ## Overview

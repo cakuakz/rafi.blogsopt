@@ -4,11 +4,14 @@ description: 'Personal admin panel website project'
 pubDate: 2023-08-28
 endProjectDate: 2024-11-26
 techStack: [
-    'lineicons:flutter',
-    'lineicons:postgresql',
-    'lineicons:typescript'
+    'lineicons:nextjs',
+    'lineicons:typescript',
+    'lineicons:tailwindcss',
+    'simple-icons:antdesign',
+    'lineicons:postgresql'
 ]
 projectUrl: https://github.com/cakuakz/ecommerce-web
+heroImage: https://res.cloudinary.com/rafirfansyah/image/upload/v1736096576/monito_mock_cawrwh.svg
 ---
 
 ## Overview

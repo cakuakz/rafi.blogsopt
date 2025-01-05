@@ -9,7 +9,7 @@ const posts = (await getCollection('project')).sort(
 
 const recentProjects = Array.from(
     new Set(
-        posts.slice(0, 5)
+        posts.slice(0, 4)
     )
 )
 

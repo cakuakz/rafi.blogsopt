@@ -9,6 +9,7 @@ techStack: [
     'lineicons:typescript'
 ]
 projectUrl: https://github.com/Kalma-Project/Kalma-Mobile
+heroImage: https://res.cloudinary.com/rafirfansyah/image/upload/v1736096625/kalma_mock_plcbwl.svg
 ---
 
 ## Overview

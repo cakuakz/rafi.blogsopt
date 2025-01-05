@@ -39,6 +39,7 @@
   "devDependencies": {
     "@iconify-json/lineicons": "^1.2.4",
     "@iconify-json/mdi": "^1.2.1",
+    "@iconify-json/simple-icons": "^1.2.18",
     "astro-icon": "^1.1.2"
   }
 }

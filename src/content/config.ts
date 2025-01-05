@@ -23,6 +23,7 @@ const project = defineCollection({
 		endProjectDate: z.coerce.date().optional(),
 		techStack: z.array(z.string()),
 		projectUrl: z.string().optional(),
+		heroImage: z.string().optional()
 	})
 })
 

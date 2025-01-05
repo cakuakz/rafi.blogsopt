@@ -4,11 +4,12 @@ description: 'Company Profile Website'
 pubDate: 2023-08-28
 endProjectDate: 2024-11-26
 techStack: [
-    'lineicons:flutter',
-    'lineicons:postgresql',
-    'lineicons:typescript'
+    'lineicons:nextjs',
+    'lineicons:typescript',
+    'lineicons:tailwindcss'
 ]
 projectUrl: https://github.com/cakuakz/JSB-Agency
+heroImage: https://res.cloudinary.com/rafirfansyah/image/upload/v1736096462/jsb_mock_mnh96h.svg
 ---
 
 ## Overview

@@ -1,8 +1,7 @@
 ---
-title: Understanding Data Fetching Strategies
+title: Fetch Your Data Like a Pro!
 description: Simple explanation about data fetching methods
 pubDate: 2024-12-01
-heroImage: 632558bac3690972f2e9bf90_database-light_ndhlzs
 tags: ['data-fetch', 'nextjs', 'frontend']
 duration: 10 Minutes
 likes: 0
