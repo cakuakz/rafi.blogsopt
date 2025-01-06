@@ -4,8 +4,8 @@ import HomeButton from "@components/HomeButton.astro"
 import StackBox from "@components/StackBox.astro"
 
 ---
-<div class="px-28 pb-56 pt-56 flex flex-col items-center justify-center text-center section1-container">
-    <img src="/assets/home/section1_home_bg.svg" alt="bg image" class="absolute -z-20 top-[88px]"/>
+<div class="px-28 pb-56 pt-28 sm:pt-56 flex flex-col items-center justify-center text-center section1-container">
+    <img src="/assets/home/section1_home_bg.svg" alt="bg image" class="absolute -z-20 top-[430px] sm:top-[88px] w-full"/>
     <StackBox 
         text="Tailwind CSS"
         imageSource="/assets/icons/tailwind_stackbox_svg.svg"
@@ -45,7 +45,7 @@ import StackBox from "@components/StackBox.astro"
             <img src="/assets/icons/waving_hand.svg" alt=""/>
             <p class="text-[#909090] font-medium text-xl">Hey, I'm Rafi, crafting the web with passion and precision</p>
         </span>
-        <div class="flex items-center justify-center space-x-1">
+        <div class="flex flex-col sm:flex-row space-y-8 sm:space-y-0 items-center justify-center space-x-1">
             <HomeButton 
                 text="Read my blog"
                 className="homebutton"

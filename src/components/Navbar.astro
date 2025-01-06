@@ -5,12 +5,12 @@
     <!-- Navigation Links -->
     <ul class="flex space-x-4 md:space-x-6 text-white items-center">
         {['Home', 'About', 'Blog', 'Project'].map((item, index) => {
-            const link = item === 'Home' ? '/' : `/${item.toLowerCase()}`;
-            const isActive = Astro.url.pathname === link;
+            const link = item === 'Home' ? '/' : `/${item.toLowerCase()}/`
+            const isActive = Astro.url.pathname === link
             return (
                 <li 
                     class={`text-sm md:text-base font-normal px-3 py-2 rounded-xl cursor-pointer ${
-                        isActive ? 'bg-[#1C1C1C]' : ''
+                        isActive ? 'bg-[#1C1C1C]' : 'bg-transparent'
                     }`}
                     tabindex={index}
                 >
@@ -20,7 +20,6 @@
         })}
     </ul>
 
-    <!-- Logo -->
     <a href="/" class="hidden lg:block">
         <img 
             src="/assets/MMRI.svg"
@@ -33,7 +32,6 @@
 <script>
     import { animate, spring } from "motion"
 
-    // Animate logo on hover
     const logo = document.querySelectorAll(".blog-logo")
 
     logo.forEach(button => {
@@ -57,10 +55,8 @@
             if (currentScrollY === 0) {
                 navbar.style.transform = 'translateY(0)';
             } else if (currentScrollY > lastScrollY) {
-                // Hide navbar when scrolling down
                 navbar.style.transform = 'translateY(-100%)';
             } else {
-                // Show navbar when scrolling up
                 navbar.style.transform = 'translateY(0)';
             }
         }
@@ -70,20 +66,19 @@
 </script>
 
 <style>
-    /* Style adjustments for the responsive navbar */
     .blog-logo {
-        width: 40px; /* Default logo width for mobile */
+        width: 40px;
     }
 
     @media (min-width: 768px) {
         .blog-logo {
-            width: 48px; /* Medium screen adjustments */
+            width: 48px;
         }
     }
 
     @media (min-width: 1024px) {
         .blog-logo {
-            width: auto; /* Full size on large screens */
+            width: auto;
         }
     }
 </style>
