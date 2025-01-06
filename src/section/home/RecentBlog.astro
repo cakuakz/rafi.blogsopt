@@ -2,25 +2,27 @@
 import BlogCard from "@components/blog/BlogCard.astro";
 import RecentBlogCard from "@components/blog/RecentBlogCard.astro";
 import CustomPageTitle from "@components/CustomPageTitle.astro";
-import { getCollection } from "astro:content"
+import { getCollection } from "astro:content";
 
 const posts = (await getCollection('blog')).sort(
     (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
-)
+);
 
 const recentPosts = Array.from(
     new Set(
         posts.slice(0, 3)
     )
-)
+);
 ---
-<div class="flex flex-col items-center justify-center mt-24 mb-52">
+<div class="flex flex-col items-center justify-center mt-24 mb-52 px-4">
     <CustomPageTitle 
         title="Blog"
         className="text-center"
     />
-    <p class="mt-2 text-[#909090] text-xl text-center font-medium mb-24">Discovering the steps and stories that shaped my work</p>
-    <div class="flex flex-col space-y-6 lg:space-y-0 lg:flex-row lg:space-x-4">
+    <p class="mt-2 text-[#909090] text-xl text-center font-medium mb-12">
+        Discovering the steps and stories that shaped my work
+    </p>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 w-full max-w-screen-xl">
         {recentPosts.map((item) => (
             <RecentBlogCard 
                 title={item.data.title}
