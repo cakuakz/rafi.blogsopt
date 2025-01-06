@@ -1,6 +1,5 @@
 ---
 import { Icon } from 'astro-icon/components'
-import { Image } from 'astro:assets'
 
 interface Props {
     title: string
@@ -17,7 +16,7 @@ const { title, description, href, iconStackName, projectUrl, heroImage } = Astro
 <div class="justify-self-center" data-post>
         <div class="relative flex flex-col border border-[#242424] bg-[#1C1C1C] rounded-sm max-w-[430px] w-full h-full">
             <div class="relative">
-                <Image
+                <img
                     src={heroImage ? heroImage : "/assets/projects/project_placeholder.svg"}
                     alt="Project placeholder"
                     width={430}
