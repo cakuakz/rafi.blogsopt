@@ -8,18 +8,18 @@ import IconLinkedin from "./icon-component/IconLinkedin.astro";
     <nav class="flex flex-col md:flex-row-reverse md:justify-between items-center">
         <ul class="flex flex-wrap justify-center md:space-x-8 text-[#F6F6F6] items-center space-y-2 md:space-y-0">
             {['Home', 'About', 'Blog', 'Project'].map((item, index) => {
-                const link = item === 'Home' ? '/' : `/${item.toLowerCase()}`;
-                const isActive = Astro.url.pathname === link;
+                const link = item === 'Home' ? '/' : `/${item.toLowerCase()}/`
+                const isActive = Astro.url.pathname === link
                 return (
                     <li 
                         class={`text-sm md:text-base font-normal px-3 py-2 rounded-xl cursor-pointer ${
-                            isActive ? 'bg-[#272727]' : ''
+                            isActive ? 'bg-[#1C1C1C]' : 'bg-transparent'
                         }`}
                         tabindex={index}
                     >
                         <a href={link}>{item}</a>
                     </li>
-                );
+                )
             })}
         </ul>
         <a href="/" class="hidden lg:block">
