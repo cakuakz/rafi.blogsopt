@@ -9,6 +9,7 @@ import FormattedDate from '@components/FormattedDate.astro';
 import Navbar from '@components/Navbar.astro';
 import '@fontsource-variable/inter';
 import type { CollectionEntry } from 'astro:content';
+import '@/styles/global.css'
 
 type Props = CollectionEntry<'project'>['data'] & {
     headings: {

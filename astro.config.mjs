@@ -18,7 +18,16 @@ import netlify from '@astrojs/netlify';
 // https://astro.build/config
 export default defineConfig({
   site: process.env.SITE_URL || 'http://localhost:4321',
-  integrations: [tailwind(), icon(), mdx(), react(), sitemap(), db()],
+  integrations: [
+    tailwind({
+      applyBaseStyles: false
+    }), 
+    icon(), 
+    mdx(), 
+    react(), 
+    sitemap(), 
+    db()
+  ],
   output: 'static',
   adapter: netlify(),
   vite: {

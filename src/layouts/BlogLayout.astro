@@ -9,6 +9,8 @@ import FormattedDate from '@components/FormattedDate.astro';
 import Navbar from '@components/Navbar.astro';
 import '@fontsource-variable/inter';
 import type { CollectionEntry } from 'astro:content';
+import '@/styles/global.css'
+import TocDrawer from '@components/blog/TocDrawer';
 
 type Props = CollectionEntry<'blog'>['data'] & {
     headings: {
@@ -32,12 +34,12 @@ const { title, description, pubDate, updatedDate, tags, headings, duration, } = 
         <main>
             <article>
                 <img src="/assets/radial_pattern_bg.svg" alt="Radial Bg" class="absolute top-0 left-0 opacity-30 z-[-1]" />
-                <div class="flex flex-col px-20 py-24 relative">
-                    <CustomPageTitle textSize="text-[4.5rem]" title={title} className='title-section'/>
+                <div class="flex flex-col px-5 lg:px-20 py-24 relative">
+                    <CustomPageTitle title={title} className='title-section text-3xl md:!text-6xl'/>
                     <div class="flex">
                         <div class="flex flex-col">
-                            <div class="flex flex-col space-y-16">
-                                <p class="text-[#F6F6F6] font-light text-lg pr-7 title-section">{description}</p>
+                            <div class="flex flex-col space-y-8 md:space-y-16">
+                                <p class="text-[#F6F6F6] font-light text-sm md:text-lg pr-7 title-section">{description}</p>
                                 <div class="flex items-center">
                                     <div class="pr-7 border-r-[0.5px] border-r-white">
                                         <FormattedDate date={pubDate} />
@@ -64,8 +66,11 @@ const { title, description, pubDate, updatedDate, tags, headings, duration, } = 
                                 <slot />
                             </div>
                         </div>
-                        <div class="flex flex-col items-center pl-32 pt-32 w-fit">
+                        <div class="hidden lg:flex flex-col items-center pl-32 pt-32 w-fit">
                             {headings.length > 0 && <TableOfContent headings={headings} />}
+                        </div>
+                        <div class="fixed bottom-8 right-4 lg:hidden">
+                            {headings.length > 0 && <TocDrawer headings={headings} client:only="react"/>}
                         </div>
                     </div>
                 </div>

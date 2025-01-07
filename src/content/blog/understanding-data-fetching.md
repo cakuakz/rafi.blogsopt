@@ -9,4 +9,4 @@ likes: 0
 
 ## Introduction
 
-Data fetching adalah sebuah istilah untuk menggambarkan metode - metode yang akan digunakan dalam mengambil dan mengolah data dari server pada browser.
+On my way to write it down!, still havent got time to write lol.
