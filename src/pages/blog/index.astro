@@ -15,12 +15,6 @@ const tags = Array.from(
         posts.flatMap(post => post.data.tags || [])
     )
 )
-
-const imagesUrl = Array.from(
-    new Set(
-        posts.flatMap(post => post.data.heroImage || [])
-    )
-)
 ---
 
 <MainLayout

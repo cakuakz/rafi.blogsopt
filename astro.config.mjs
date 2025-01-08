@@ -11,8 +11,6 @@ import react from '@astrojs/react';
 
 import sitemap from '@astrojs/sitemap';
 
-import db from '@astrojs/db';
-
 import netlify from '@astrojs/netlify';
 
 // https://astro.build/config
@@ -22,11 +20,14 @@ export default defineConfig({
     tailwind({
       applyBaseStyles: false
     }), 
+    mdx({
+      syntaxHighlight: false,
+      extendMarkdownConfig: false,
+      gfm: false
+    }), 
+    react(),
     icon(), 
-    mdx(), 
-    react(), 
     sitemap(), 
-    db()
   ],
   output: 'static',
   adapter: netlify(),
