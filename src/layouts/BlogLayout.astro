@@ -11,6 +11,7 @@ import '@fontsource-variable/inter';
 import type { CollectionEntry } from 'astro:content';
 import '@/styles/global.css'
 import TocDrawer from '@components/blog/TocDrawer';
+import BlogLinkText from '@components/blog/BlogLinkText';
 
 type Props = CollectionEntry<'blog'>['data'] & {
     headings: {
