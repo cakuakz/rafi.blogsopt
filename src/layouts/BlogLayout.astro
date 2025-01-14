@@ -11,7 +11,6 @@ import '@fontsource-variable/inter';
 import type { CollectionEntry } from 'astro:content';
 import '@/styles/global.css'
 import TocDrawer from '@components/blog/TocDrawer';
-import BlogLinkText from '@components/blog/BlogLinkText';
 
 type Props = CollectionEntry<'blog'>['data'] & {
     headings: {
@@ -22,13 +21,13 @@ type Props = CollectionEntry<'blog'>['data'] & {
     slug: string;
 }
 
-const { title, description, pubDate, updatedDate, tags, headings, duration, } = Astro.props;
+const { title, description, pubDate, updatedDate, tags, headings, duration, heroImage } = Astro.props;
 ---
 
 <!doctype html>
 <html lang="en">
 	<head>
-		<BaseHead title={title} description={description} />
+		<BaseHead title={title} description={description} image={heroImage}/>
 	</head>
 	<body>
 		<Navbar />
