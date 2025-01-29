@@ -1,50 +1,54 @@
 ---
-import StackBox from './StackBox.astro'
+import StackBox from "./StackBox.astro";
 
 interface Props {
-    title: string
-    description: string
-    imageSource: string
+  title: string;
+  description: string;
+  imageSource: string;
 }
 
-const { title, description, imageSource } = Astro.props
+const { title, description, imageSource } = Astro.props;
 ---
+
 <div class="tooltip-container relative">
-    <div class="cursor-pointer">
-        <StackBox 
-            imageSource={imageSource}
-        />
+  <div class="cursor-pointer">
+    <StackBox imageSource={imageSource} />
+  </div>
+
+  <div
+    class="tooltip absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 z-50 opacity-0 invisible translate-y-2 p-3 bg-[#272727] text-white text-sm rounded-lg shadow-md min-w-[200px] max-w-[95vw] max-h-[60vh] overflow-hidden transition-all duration-300"
+  >
+    <div class="h-full flex flex-col">
+      <p class="text-xl font-normal text-[#F6F6F6] break-words mb-3 line-clamp-1">{title}</p>
+      <p class="text-sm text-[#969696] break-words">{description}</p>
     </div>
 
-    <div class="tooltip absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 z-50 opacity-0 invisible translate-y-2 p-3 bg-[#272727] text-white text-sm rounded-lg shadow-md min-w-[200px] max-w-[95vw] max-h-[60vh] overflow-hidden transition-all duration-300">
-        <div class="h-full flex flex-col">
-            <p class="text-xl font-normal text-[#F6F6F6] break-words mb-3 line-clamp-1">{title}</p>
-            <p class="text-sm text-[#969696] break-words">{description}</p>
-        </div>
-
-        <div class="absolute bottom-[-8px] left-1/2 transform -translate-x-1/2 w-4 h-4 rotate-45 bg-[#272727]"></div>
+    <div
+      class="absolute bottom-[-8px] left-1/2 transform -translate-x-1/2 w-4 h-4 rotate-45 bg-[#272727]"
+    >
     </div>
+  </div>
 </div>
 
 <style>
-    /* Tooltip hover styles for larger screens */
-    .tooltip-container:hover .tooltip {
-        opacity: 1;
-        visibility: visible;
-        transform: translateX(-50%) translateY(0);
-    }
+  /* Tooltip hover styles for larger screens */
+  .tooltip-container:hover .tooltip {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(0);
+  }
 
-    /* Responsive design adjustments for smaller screens */
-    @media (max-width: 767px) {
-        .tooltip {
-            bottom: auto; /* Reset bottom positioning */
-            top: 110%; /* Place tooltip below the element */
-            left: 50%;
-            transform: translateX(-50%);
-            min-width: 80%; /* Ensure tooltip width adjusts to screen */
-            max-width: 90vw; /* Prevent tooltip from overflowing */
-            max-height: 50vh; /* Limit height for smaller screens */
-            overflow-y: auto; /* Enable scrolling for overflow content */
-        }
+  /* Responsive design adjustments for smaller screens */
+  @media (max-width: 767px) {
+    .tooltip {
+      bottom: auto; /* Reset bottom positioning */
+      top: 110%; /* Place tooltip below the element */
+      left: 50%;
+      transform: translateX(-50%);
+      min-width: 80%; /* Ensure tooltip width adjusts to screen */
+      max-width: 90vw; /* Prevent tooltip from overflowing */
+      max-height: 50vh; /* Limit height for smaller screens */
+      overflow-y: auto; /* Enable scrolling for overflow content */
     }
+  }
 </style>

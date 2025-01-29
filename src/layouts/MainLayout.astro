@@ -1,15 +1,15 @@
 ---
-import BaseHead from '@components/BaseHead.astro';
-import Footer from '@components/Footer.astro';
-import Navbar from '@components/Navbar.astro';
-import '@fontsource-variable/inter';
-import { AstroFont } from 'astro-font';
+import BaseHead from "@components/BaseHead.astro";
+import Footer from "@components/Footer.astro";
+import Navbar from "@components/Navbar.astro";
+import "@fontsource-variable/inter";
+import { AstroFont } from "astro-font";
 import { join } from "node:path";
-import '@/styles/global.css'
+import "@/styles/global.css";
 
 interface Props {
-	title: string
-	description: string
+  title: string;
+  description: string;
 }
 
 const { title, description } = Astro.props;
@@ -17,57 +17,57 @@ const { title, description } = Astro.props;
 
 <!doctype html>
 <html lang="en">
-	<head>
-		<BaseHead title={title} description={description} />
-			<AstroFont
-				config={[
-					{
-						name: "Gilroy",
-						src: [
-							{
-								style: 'normal',
-								weight: '400',
-								path: join(process.cwd(), 'public', 'fonts', 'Gilroy-Regular.ttf')
-							},
-							{
-								style: 'medium',
-								weight: '500',
-								path: join(process.cwd(), 'public', 'fonts', 'Gilroy-Medium.ttf')
-							},
-							{
-								style: 'semibold',
-								weight: '600',
-								path: join(process.cwd(), 'public', 'fonts', 'Gilroy-SemiBold.ttf')
-							},
-							{
-								style: 'bold',
-								weight: '700',
-								path: join(process.cwd(), 'public', 'fonts', 'Gilroy-Bold.ttf')
-							}
-						],
-						preload: false,
-						display: "swap",
-						selector: ".gilroy",
-						fallback: "sans-serif",
-					},
-				]}
-			/>
-	</head>
-	<body>
-		<Navbar />
-		<slot />
-		<Footer />
-	</body>
+  <head>
+    <BaseHead title={title} description={description} />
+    <AstroFont
+      config={[
+        {
+          name: "Gilroy",
+          src: [
+            {
+              style: "normal",
+              weight: "400",
+              path: join(process.cwd(), "public", "fonts", "Gilroy-Regular.ttf"),
+            },
+            {
+              style: "medium",
+              weight: "500",
+              path: join(process.cwd(), "public", "fonts", "Gilroy-Medium.ttf"),
+            },
+            {
+              style: "semibold",
+              weight: "600",
+              path: join(process.cwd(), "public", "fonts", "Gilroy-SemiBold.ttf"),
+            },
+            {
+              style: "bold",
+              weight: "700",
+              path: join(process.cwd(), "public", "fonts", "Gilroy-Bold.ttf"),
+            },
+          ],
+          preload: false,
+          display: "swap",
+          selector: ".gilroy",
+          fallback: "sans-serif",
+        },
+      ]}
+    />
+  </head>
+  <body>
+    <Navbar />
+    <slot />
+    <Footer />
+  </body>
 </html>
 <style is:global>
-	html {
-		font-family: 'Inter Variable', sans-serif;
-		scroll-behavior: smooth;
-	}
+  html {
+    font-family: "Inter Variable", sans-serif;
+    scroll-behavior: smooth;
+  }
 
-	body {
-		background-color: #161616;
-		overflow-x: hidden;
-		width: 100vw;
-	}
+  body {
+    background-color: #161616;
+    overflow-x: hidden;
+    width: 100vw;
+  }
 </style>

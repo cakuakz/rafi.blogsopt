@@ -1,35 +1,35 @@
 // @ts-check
-import { defineConfig } from 'astro/config';
+import { defineConfig } from "astro/config";
 
-import tailwind from '@astrojs/tailwind';
+import tailwind from "@astrojs/tailwind";
 
-import icon from 'astro-icon';
+import icon from "astro-icon";
 
-import mdx from '@astrojs/mdx';
+import mdx from "@astrojs/mdx";
 
-import react from '@astrojs/react';
+import react from "@astrojs/react";
 
-import sitemap from '@astrojs/sitemap';
+import sitemap from "@astrojs/sitemap";
 
-import netlify from '@astrojs/netlify';
+import netlify from "@astrojs/netlify";
 
 // https://astro.build/config
 export default defineConfig({
-  site: process.env.SITE_URL || 'http://localhost:4321',
+  site: process.env.SITE_URL || "http://localhost:4321",
   integrations: [
     tailwind({
-      applyBaseStyles: false
-    }), 
+      applyBaseStyles: false,
+    }),
     mdx({
       syntaxHighlight: false,
       extendMarkdownConfig: false,
-      gfm: false
-    }), 
+      gfm: false,
+    }),
     react(),
-    icon(), 
-    sitemap(), 
+    icon(),
+    sitemap(),
   ],
-  output: 'static',
+  output: "static",
   adapter: netlify(),
   vite: {
     css: {

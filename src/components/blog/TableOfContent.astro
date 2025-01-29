@@ -1,13 +1,13 @@
 ---
 interface Props {
   headings: {
-    depth: number
-    slug: string
-    text: string
-  }[]
+    depth: number;
+    slug: string;
+    text: string;
+  }[];
 }
 
-const { headings } = Astro.props
+const { headings } = Astro.props;
 ---
 
 <div class="toc-container">
@@ -16,8 +16,10 @@ const { headings } = Astro.props
     <ul>
       {
         headings.map((heading) => (
-          <li class={`depth-${heading.depth} space-y-4 text-[#83868A] hover:text-white`} >
-            <a href={`#${heading.slug}`} class="block">{heading.text}</a>
+          <li class={`depth-${heading.depth} space-y-4 text-[#83868A] hover:text-white`}>
+            <a href={`#${heading.slug}`} class="block">
+              {heading.text}
+            </a>
           </li>
         ))
       }
@@ -25,11 +27,21 @@ const { headings } = Astro.props
   </div>
 </div>
 <style>
-  .depth-2 { padding-left: 0; }
-  .depth-3 { padding-left: 1rem; }
-  .depth-4 { padding-left: 2rem; }
-  .depth-5 { padding-left: 3rem; }
-  .depth-6 { padding-left: 4rem; }
+  .depth-2 {
+    padding-left: 0;
+  }
+  .depth-3 {
+    padding-left: 1rem;
+  }
+  .depth-4 {
+    padding-left: 2rem;
+  }
+  .depth-5 {
+    padding-left: 3rem;
+  }
+  .depth-6 {
+    padding-left: 4rem;
+  }
 
   .toc-container {
     position: sticky;

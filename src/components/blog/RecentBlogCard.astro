@@ -1,27 +1,32 @@
 ---
 interface Props {
-    title: string;
-    description: string;
-    imgUrl?: string;
-    href: string;
+  title: string;
+  description: string;
+  imgUrl?: string;
+  href: string;
 }
 
 const { title, description, imgUrl, href } = Astro.props;
 const randomId = Math.floor(Math.random() * 1000);
 ---
-<div class="bg-gradient-to-t from-[#181818] to-[#2C2C2C] bg-clip-border p-[1.5px] shadow-inner rounded-lg w-full h-full">
-    <div class="flex flex-col bg-[#282828] bg-opacity-70 rounded-lg h-full">
-        <a href={href} class="flex flex-col h-full">
-            <img
-                src={imgUrl ? imgUrl : `https://picsum.photos/seed/${randomId}/400/250`} 
-                alt="Blog Card"
-                class="rounded-t-lg w-full h-auto object-cover"
-                loading="lazy"
-            />
-            <div class="flex flex-col py-4 px-3 md:py-5 md:px-4 items-start text-start w-full h-full space-y-2">
-                <p class="text-sm md:text-base font-semibold text-[#F6F6F6]">{title}</p>
-                <p class="text-sm md:text-base font-normal text-[#858585] ">{description}</p>
-            </div>
-        </a>
-    </div>
+
+<div
+  class="bg-gradient-to-t from-[#181818] to-[#2C2C2C] bg-clip-border p-[1.5px] shadow-inner rounded-lg w-full h-full"
+>
+  <div class="flex flex-col bg-[#282828] bg-opacity-70 rounded-lg h-full">
+    <a href={href} class="flex flex-col h-full">
+      <img
+        src={imgUrl ? imgUrl : `https://picsum.photos/seed/${randomId}/400/250`}
+        alt="Blog Card"
+        class="rounded-t-lg w-full h-auto object-cover"
+        loading="lazy"
+      />
+      <div
+        class="flex flex-col py-4 px-3 md:py-5 md:px-4 items-start text-start w-full h-full space-y-2"
+      >
+        <p class="text-sm md:text-base font-semibold text-[#F6F6F6]">{title}</p>
+        <p class="text-sm md:text-base font-normal text-[#858585]">{description}</p>
+      </div>
+    </a>
+  </div>
 </div>

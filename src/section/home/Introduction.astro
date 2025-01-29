@@ -1,78 +1,87 @@
 ---
-import CustomPageTitle from "@components/CustomPageTitle.astro"
-import HomeButton from "@components/HomeButton.astro"
-import StackBox from "@components/StackBox.astro"
-
+import CustomPageTitle from "@components/CustomPageTitle.astro";
+import HomeButton from "@components/HomeButton.astro";
+import StackBox from "@components/StackBox.astro";
 ---
-<div class="px-28 pb-56 pt-28 sm:pt-56 flex flex-col items-center justify-center text-center section1-container">
-    <img src="/assets/home/section1_home_bg.svg" alt="bg image" class="absolute -z-20 top-[430px] sm:top-[88px] w-full"/>
-    <StackBox 
-        text="Tailwind CSS"
-        imageSource="/assets/icons/tailwind_stackbox_svg.svg"
-        position="absolute"
-        extendedClass="top-48 left-36 rotate-2"
+
+<div
+  class="px-28 pb-56 pt-28 sm:pt-56 flex flex-col items-center justify-center text-center section1-container"
+>
+  <img
+    src="/assets/home/section1_home_bg.svg"
+    alt="bg image"
+    class="absolute -z-20 top-[430px] sm:top-[88px] w-full"
+  />
+  <StackBox
+    text="Tailwind CSS"
+    imageSource="/assets/icons/tailwind_stackbox_svg.svg"
+    position="absolute"
+    extendedClass="top-48 left-36 rotate-2"
+  />
+  <StackBox
+    text="Javascript"
+    imageSource="/assets/icons/javascript_stackbox_svg.svg"
+    position="absolute"
+    extendedClass="top-[700px] right-[124px] rotate-2"
+  />
+  <StackBox
+    text="Next.js"
+    imageSource="/assets/icons/nextjs_stackbox_svg.svg"
+    position="absolute"
+    extendedClass="top-[152px] right-[187px] rotate-[13deg]"
+  />
+  <StackBox
+    text="React"
+    imageSource="/assets/icons/react_stackbox_svg.svg"
+    position="absolute"
+    extendedClass="top-[396px] right-20 -rotate-[4deg]"
+  />
+  <StackBox
+    text="HTML"
+    imageSource="/assets/icons/html_stackbox_svg.svg"
+    position="absolute"
+    extendedClass="top-[481px] left-[88px] -rotate-[4deg]"
+  />
+  <div class="title-section">
+    <CustomPageTitle
+      title="Building digital experiences that leave a mark on the world."
+      textSize="text-[64px]"
     />
-    <StackBox 
-        text="Javascript"
-        imageSource="/assets/icons/javascript_stackbox_svg.svg"
-        position="absolute"
-        extendedClass="top-[700px] right-[124px] rotate-2"
-    />
-    <StackBox 
-        text="Next.js"
-        imageSource="/assets/icons/nextjs_stackbox_svg.svg"
-        position="absolute"
-        extendedClass="top-[152px] right-[187px] rotate-[13deg]"
-    />
-    <StackBox 
-        text="React"
-        imageSource="/assets/icons/react_stackbox_svg.svg"
-        position="absolute"
-        extendedClass="top-[396px] right-20 -rotate-[4deg]"
-    />
-    <StackBox 
-        text="HTML"
-        imageSource="/assets/icons/html_stackbox_svg.svg"
-        position="absolute"
-        extendedClass="top-[481px] left-[88px] -rotate-[4deg]"
-    />
-    <div class="title-section">
-        <CustomPageTitle 
-            title="Building digital experiences that leave a mark on the world."
-            textSize="text-[64px]"
-        />
-        <span class="flex items-center space-x-3 justify-center mt-2 mb-14">
-            <img src="/assets/icons/waving_hand.svg" alt=""/>
-            <p class="text-[#909090] font-medium text-xl">Hey, I'm Rafi, crafting the web with passion and precision</p>
-        </span>
-        <div class="flex flex-col sm:flex-row space-y-8 sm:space-y-0 items-center justify-center space-x-1">
-            <HomeButton 
-                text="Read my blog"
-                className="homebutton"
-            />
-            <button class="rounded-[10px] text-[#A2A2A2] text-lg font-medium hover:-translate-y-1 transform duration-200 bg-[#161616] px-8 py-3 resume-button">
-                My Resume
-            </button>
-        </div>
+    <span class="flex items-center space-x-3 justify-center mt-2 mb-14">
+      <img src="/assets/icons/waving_hand.svg" alt="" />
+      <p class="text-[#909090] font-medium text-xl">
+        Hey, I'm Rafi, crafting the web with passion and precision
+      </p>
+    </span>
+    <div
+      class="flex flex-col sm:flex-row space-y-8 sm:space-y-0 items-center justify-center space-x-1"
+    >
+      <HomeButton text="Read my blog" className="homebutton" />
+      <button
+        class="rounded-[10px] text-[#A2A2A2] text-lg font-medium hover:-translate-y-1 transform duration-200 bg-[#161616] px-8 py-3 resume-button"
+      >
+        My Resume
+      </button>
     </div>
+  </div>
 </div>
 <script>
-    document.addEventListener("DOMContentLoaded", () => {
-        const buttons = document.querySelectorAll("button.homebutton")
-        buttons.forEach((button) => {
-            button.addEventListener("click", () => {
-                location.replace("/blog")
-            })
-        })
-
-        const buttonResume = document.querySelector("button.resume-button")
-        if (buttonResume) {
-            buttonResume.addEventListener("click", () => {
-                const link = document.createElement("a")
-                link.href = "/Rafi_Irfansyah-Current_Resume.pdf"
-                link.download = "Rafi-Current-Resume.pdf"
-                link.click()
-            })
-        }
+  document.addEventListener("DOMContentLoaded", () => {
+    const buttons = document.querySelectorAll("button.homebutton");
+    buttons.forEach((button) => {
+      button.addEventListener("click", () => {
+        location.replace("/blog");
+      });
     });
+
+    const buttonResume = document.querySelector("button.resume-button");
+    if (buttonResume) {
+      buttonResume.addEventListener("click", () => {
+        const link = document.createElement("a");
+        link.href = "/Rafi_Irfansyah-Current_Resume.pdf";
+        link.download = "Rafi-Current-Resume.pdf";
+        link.click();
+      });
+    }
+  });
 </script>

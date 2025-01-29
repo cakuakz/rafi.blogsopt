@@ -1,22 +1,22 @@
 ---
-import { Icon } from 'astro-icon/components'
+import { Icon } from "astro-icon/components";
 
 interface Props {
-    placeholder: string
-    iconName?: string
-    iconClassname?: string
+  placeholder: string;
+  iconName?: string;
+  iconClassname?: string;
 }
 
-const { placeholder, iconName, iconClassname } = Astro.props
+const { placeholder, iconName, iconClassname } = Astro.props;
 ---
 
-<div class="bg-[#1C1C1C] flex items-center border border-[#282828] rounded-xl py-3 space-x-3 drop-shadow-custom-input">
-    {iconName && (
-        <Icon name={iconName} class={iconClassname} />
-    )}
-    <input 
-        type="text"
-        class="bg-[#1C1C1C] w-full active:border-0 focus-within:outline-none text-[#F6F6F6]"
-        placeholder={placeholder}
-    />
+<div
+  class="bg-[#1C1C1C] flex items-center border border-[#282828] rounded-xl py-3 space-x-3 drop-shadow-custom-input"
+>
+  {iconName && <Icon name={iconName} class={iconClassname} />}
+  <input
+    type="text"
+    class="bg-[#1C1C1C] w-full active:border-0 focus-within:outline-none text-[#F6F6F6]"
+    placeholder={placeholder}
+  />
 </div>

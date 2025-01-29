@@ -1,54 +1,50 @@
 ---
-import { Icon } from 'astro-icon/components'
-import BlogTag from './BlogTag.astro'
+import { Icon } from "astro-icon/components";
+import BlogTag from "./BlogTag.astro";
 
 interface Props {
-    title: string
-    description: string
-    imgUrl?: string
-    tags: string[]
-    href: string
-    duration: string
+  title: string;
+  description: string;
+  imgUrl?: string;
+  tags: string[];
+  href: string;
+  duration: string;
 }
 
-const { title, description, tags, href, duration, imgUrl } = Astro.props
-const randomId = Math.floor(Math.random() * 1000)
+const { title, description, tags, href, duration, imgUrl } = Astro.props;
+const randomId = Math.floor(Math.random() * 1000);
 ---
 
 <div class="justify-self-center" data-post data-tags={JSON.stringify(tags)}>
-    <a href={href}>
-        <div 
-            class="flex flex-col border border-[#242424] bg-[#1C1C1C] rounded-sm cursor-pointer max-w-[430px] max-h-[436px] w-full h-full"
-        >
-            <img 
-                src={ imgUrl ? imgUrl : `https://picsum.photos/seed/${randomId}/400/250`} 
-                width={430}
-                height={234}
-                alt="Blog Image"
-                class="image-style"
-                loading="lazy"
-            />
-            <div
-                class="p-4 flex flex-col justify-start"
-            >
-                <p class="text-sm font-semibold text-[#F6F6F6] post-title">{title}</p>
-                <p class="text-sm font-normal text-[#858585] mb-4 post-description">{description}</p>
-                <div class="flex space-x-2 items-center">
-                    <Icon name="mingcute:time-line" class="text-white"/>
-                    <p class="text-sm text-[#858585] font-normal">{duration}</p>
-                </div>
-                <div class="flex space-x-4 mt-6">
-                    {tags.map((tag) => (
-                        <BlogTag tags={tag}/>
-                    ))}
-                </div>
-            </div>
+  <a href={href}>
+    <div
+      class="flex flex-col border border-[#242424] bg-[#1C1C1C] rounded-sm cursor-pointer max-w-[430px] max-h-[436px] w-full h-full"
+    >
+      <img
+        src={imgUrl ? imgUrl : `https://picsum.photos/seed/${randomId}/400/250`}
+        width={430}
+        height={234}
+        alt="Blog Image"
+        class="image-style"
+        loading="lazy"
+      />
+      <div class="p-4 flex flex-col justify-start">
+        <p class="text-sm font-semibold text-[#F6F6F6] post-title">{title}</p>
+        <p class="text-sm font-normal text-[#858585] mb-4 post-description">{description}</p>
+        <div class="flex space-x-2 items-center">
+          <Icon name="mingcute:time-line" class="text-white" />
+          <p class="text-sm text-[#858585] font-normal">{duration}</p>
         </div>
-    </a>
+        <div class="flex space-x-4 mt-6">
+          {tags.map((tag) => <BlogTag tags={tag} />)}
+        </div>
+      </div>
+    </div>
+  </a>
 </div>
 
 <style>
-    .image-style img {
-        border-radius: 12px;
-    }
+  .image-style img {
+    border-radius: 12px;
+  }
 </style>

@@ -1,149 +1,160 @@
 ---
-import BaseHead from '@components/BaseHead.astro';
-import Comments from '@components/blog/Comments.astro';
-import TableOfContent from '@components/blog/TableOfContent.astro';
-import CustomPageTitle from '@components/CustomPageTitle.astro';
-import Footer from '@components/Footer.astro';
-import FormattedDate from '@components/FormattedDate.astro';
-import Navbar from '@components/Navbar.astro';
-import '@fontsource-variable/inter';
-import type { CollectionEntry } from 'astro:content';
-import '@/styles/global.css'
+import BaseHead from "@components/BaseHead.astro";
+import Comments from "@components/blog/Comments.astro";
+import TableOfContent from "@components/blog/TableOfContent.astro";
+import CustomPageTitle from "@components/CustomPageTitle.astro";
+import Footer from "@components/Footer.astro";
+import FormattedDate from "@components/FormattedDate.astro";
+import Navbar from "@components/Navbar.astro";
+import "@fontsource-variable/inter";
+import type { CollectionEntry } from "astro:content";
+import "@/styles/global.css";
 
-type Props = CollectionEntry<'project'>['data'] & {
-    headings: {
-        depth: number;
-        slug: string;
-        text: string;
-    }[];
-}
+type Props = CollectionEntry<"project">["data"] & {
+  headings: {
+    depth: number;
+    slug: string;
+    text: string;
+  }[];
+};
 
 const { title, description, headings, pubDate, endProjectDate } = Astro.props;
 ---
 
 <!doctype html>
 <html lang="en">
-	<head>
-		<BaseHead title={title} description={description} />
-	</head>
-	<body>
-		<Navbar />
-        <main>
-            <article>
-                <img src="/assets/radial_pattern_bg.svg" alt="Radial Bg" class="absolute top-0 left-0 opacity-30 z-[-1]" />
-                <div class="flex flex-col px-20 py-24 relative">
-                    <CustomPageTitle textSize="text-[4.5rem]" title={title} className='title-section'/>
-                    <div class="flex">
-                        <div class="flex flex-col">
-                            <div class="flex flex-col space-y-16">
-                                <p class="text-[#F6F6F6] font-light text-lg pr-7 title-section">{description}</p>
-                                <div class="flex items-center">
-                                    <div class="flex items-center text-[#F6F6F6]">
-                                        <div class="">
-                                            <FormattedDate date={pubDate} />
-                                        </div>
-                                        <p class="px-2">-</p>
-                                        {endProjectDate && (
-                                            <div class="last-updated-on">
-                                                <FormattedDate date={endProjectDate} />
-                                            </div>
-                                        )}
-                                    </div>
-                                    <span class="px-7">
-                                        <p class="text-[#F6F6F6] font-light text-xs">Project Category</p>
-                                    </span>
-                                </div>
-                            </div>
-                            <div class="flex flex-col mt-5 p-4 border border-[#272727] rounded-md max-w-[850px]">
-                                <p class="text-white font-light text-base pr-7">Stack</p>
-                            </div>
-                            <div class="blog-body">
-                                <slot />
-                            </div>
-                        </div>
-                        <div class="flex flex-col items-center pl-32 pt-32 w-fit">
-                            {headings.length > 0 && <TableOfContent headings={headings} />}
-                        </div>
+  <head>
+    <BaseHead title={title} description={description} />
+  </head>
+  <body>
+    <Navbar />
+    <main>
+      <article>
+        <img
+          src="/assets/radial_pattern_bg.svg"
+          alt="Radial Bg"
+          class="absolute top-0 left-0 opacity-30 z-[-1]"
+        />
+        <div class="flex flex-col px-20 py-24 relative">
+          <CustomPageTitle textSize="text-[4.5rem]" title={title} className="title-section" />
+          <div class="flex">
+            <div class="flex flex-col">
+              <div class="flex flex-col space-y-16">
+                <p class="text-[#F6F6F6] font-light text-lg pr-7 title-section">{description}</p>
+                <div class="flex items-center">
+                  <div class="flex items-center text-[#F6F6F6]">
+                    <div class="">
+                      <FormattedDate date={pubDate} />
                     </div>
+                    <p class="px-2">-</p>
+                    {
+                      endProjectDate && (
+                        <div class="last-updated-on">
+                          <FormattedDate date={endProjectDate} />
+                        </div>
+                      )
+                    }
+                  </div>
+                  <span class="px-7">
+                    <p class="text-[#F6F6F6] font-light text-xs">Project Category</p>
+                  </span>
                 </div>
-                <div class="flex justify-center px-20 py-4 mb-7 items-center border-t border-[#272727]">
-                    <Comments />
-                </div>
-            </article>
-        </main>
-		<Footer />
-	</body>
+              </div>
+              <div class="flex flex-col mt-5 p-4 border border-[#272727] rounded-md max-w-[850px]">
+                <p class="text-white font-light text-base pr-7">Stack</p>
+              </div>
+              <div class="blog-body">
+                <slot />
+              </div>
+            </div>
+            <div class="flex flex-col items-center pl-32 pt-32 w-fit">
+              {headings.length > 0 && <TableOfContent headings={headings} />}
+            </div>
+          </div>
+        </div>
+        <div class="flex justify-center px-20 py-4 mb-7 items-center border-t border-[#272727]">
+          <Comments />
+        </div>
+      </article>
+    </main>
+    <Footer />
+  </body>
 </html>
 <style is:global>
-    html {
-        font-family: 'Inter Variable', sans-serif;
-        scroll-behavior: smooth;
-    }
+  html {
+    font-family: "Inter Variable", sans-serif;
+    scroll-behavior: smooth;
+  }
 
-    body {
-        background-color: #161616;
-        word-wrap: break-word;
-        overflow-wrap: break-word;
-        line-height: 1.7;
-    }
+  body {
+    background-color: #161616;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    line-height: 1.7;
+  }
 
-    h1 {
-        font-size: 3.052em;
-    }
+  h1 {
+    font-size: 3.052em;
+  }
 
-    h2 {
-        font-size: 2.441em;
-    }
+  h2 {
+    font-size: 2.441em;
+  }
 
-    h3 {
-        font-size: 1.953em;
-    }
+  h3 {
+    font-size: 1.953em;
+  }
 
-    h4 {
-        font-size: 1.563em;
-    }
+  h4 {
+    font-size: 1.563em;
+  }
 
-    h5 {
-        font-size: 1.25em;
-    }
+  h5 {
+    font-size: 1.25em;
+  }
 
-    h6 {
-        font-size: 1em;
-    }
+  h6 {
+    font-size: 1em;
+  }
 
-    h1, h2, h3, h4, h5, h6 {
-        font-weight: 600;
-        color: #ffffff;
-        position: relative;
-    }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-weight: 600;
+    color: #ffffff;
+    position: relative;
+  }
 
-    .blog-body {
-        color: #83868A;
-        padding-top: 2em;
-        text-align: justify;
-    }
+  .blog-body {
+    color: #83868a;
+    padding-top: 2em;
+    text-align: justify;
+  }
 
-    .icon-button.shrink {
-        transform: scale(0.9);
-        transition: transform 0.2s ease;
-    }
+  .icon-button.shrink {
+    transform: scale(0.9);
+    transition: transform 0.2s ease;
+  }
 </style>
 <script>
-    import { animate, spring } from "motion";
+  import { animate, spring } from "motion";
 
-    const titleSections = document.querySelectorAll(".title-section");
-    titleSections.forEach((element) => {
-        animate(
-            element, 
-            { 
-                opacity: [0, 1], 
-                transform: ['translateX(-50px)', 'translateX(0px)']
-            }, 
-            { 
-                type: spring, 
-                bounce: 0.7, 
-                duration: 1.5 
-            }
-        );
-    })
+  const titleSections = document.querySelectorAll(".title-section");
+  titleSections.forEach((element) => {
+    animate(
+      element,
+      {
+        opacity: [0, 1],
+        transform: ["translateX(-50px)", "translateX(0px)"],
+      },
+      {
+        type: spring,
+        bounce: 0.7,
+        duration: 1.5,
+      }
+    );
+  });
 </script>

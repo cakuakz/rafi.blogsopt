@@ -7,7 +7,8 @@
     "start": "astro dev",
     "build": "astro check && astro build --remote",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "format": "npx prettier . --write"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.4",
@@ -46,6 +47,8 @@
     "@iconify-json/lineicons": "^1.2.4",
     "@iconify-json/mdi": "^1.2.1",
     "@iconify-json/simple-icons": "^1.2.18",
-    "astro-icon": "^1.1.2"
+    "astro-icon": "^1.1.2",
+    "prettier": "^3.4.2",
+    "prettier-plugin-astro": "^0.14.1"
   }
 }

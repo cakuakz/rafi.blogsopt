@@ -1,13 +1,17 @@
 ---
 interface Props {
-    title: string
-    textSize?: string
-    className?: string
-    id?: string
+  title: string;
+  textSize?: string;
+  className?: string;
+  id?: string;
 }
 
-const { title, textSize, className, id } = Astro.props
+const { title, textSize, className, id } = Astro.props;
 ---
-<span id={id} class={`${textSize || 'text-5xl'} w-fit font-bold bg-gradient-to-r from-[#F6F6F6] to-[#909090] bg-clip-text text-transparent pb-1 gilroy ${className}`}>
-    {title}
+
+<span
+  id={id}
+  class={`${textSize || "text-5xl"} w-fit font-bold bg-gradient-to-r from-[#F6F6F6] to-[#909090] bg-clip-text text-transparent pb-1 gilroy ${className}`}
+>
+  {title}
 </span>

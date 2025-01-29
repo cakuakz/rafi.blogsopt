@@ -5,47 +5,47 @@ import IconLinkedin from "./icon-component/IconLinkedin.astro";
 ---
 
 <div class="flex flex-col bg-[#1D1D1D] px-4 md:px-16 lg:px-40 py-6 md:py-8">
-    <nav class="flex flex-col md:flex-row-reverse md:justify-between items-center">
-        <ul class="flex flex-wrap justify-center md:space-x-8 text-[#F6F6F6] items-center my-2">
-            {['Home', 'About', 'Blog', 'Project'].map((item, index) => {
-                const link = item === 'Home' ? '/' : `/${item.toLowerCase()}/`
-                const isActive = Astro.url.pathname === link
-                return (
-                    <li 
-                        class={`text-sm md:text-base font-normal px-3 py-2 rounded-xl cursor-pointer ${
-                            isActive ? 'bg-[#1C1C1C]' : 'bg-transparent'
-                        }`}
-                        tabindex={index}
-                    >
-                        <a href={link}>{item}</a>
-                    </li>
-                )
-            })}
-        </ul>
-        <a href="/" class="hidden lg:block">
-            <img 
-                src="/assets/MMRI.svg"
-                alt="Blog Logo"
-                class="w-12 h-12 lg:w-auto lg:h-auto"
-            />
-        </a>
-    </nav>
+  <nav class="flex flex-col md:flex-row-reverse md:justify-between items-center">
+    <ul class="flex flex-wrap justify-center md:space-x-8 text-[#F6F6F6] items-center my-2">
+      {
+        ["Home", "About", "Blog", "Project"].map((item, index) => {
+          const link = item === "Home" ? "/" : `/${item.toLowerCase()}/`;
+          const isActive = Astro.url.pathname === link;
+          return (
+            <li
+              class={`text-sm md:text-base font-normal px-3 py-2 rounded-xl cursor-pointer ${
+                isActive ? "bg-[#1C1C1C]" : "bg-transparent"
+              }`}
+              tabindex={index}
+            >
+              <a href={link}>{item}</a>
+            </li>
+          );
+        })
+      }
+    </ul>
+    <a href="/" class="hidden lg:block">
+      <img src="/assets/MMRI.svg" alt="Blog Logo" class="w-12 h-12 lg:w-auto lg:h-auto" />
+    </a>
+  </nav>
 
-    <div class="flex justify-center space-x-3 md:space-x-6 py-6 md:py-8 border-b border-b-[#363636] mb-6 md:mb-8">
-        <IconGmail class="hover:scale-110 transition duration-300 ease-in-out cursor-pointer"/>
-        <IconGithub class="hover:scale-110 transition duration-300 ease-in-out cursor-pointer"/>
-        <IconLinkedin class="hover:scale-110 transition duration-300 ease-in-out cursor-pointer"/>
-    </div>
+  <div
+    class="flex justify-center space-x-3 md:space-x-6 py-6 md:py-8 border-b border-b-[#363636] mb-6 md:mb-8"
+  >
+    <IconGmail class="hover:scale-110 transition duration-300 ease-in-out cursor-pointer" />
+    <IconGithub class="hover:scale-110 transition duration-300 ease-in-out cursor-pointer" />
+    <IconLinkedin class="hover:scale-110 transition duration-300 ease-in-out cursor-pointer" />
+  </div>
 
-    <p class="text-sm md:text-base font-normal text-white text-center">
-        @ Mohamad Rafi Irfansyah 2024
-    </p>
+  <p class="text-sm md:text-base font-normal text-white text-center">
+    @ Mohamad Rafi Irfansyah 2024
+  </p>
 </div>
 
 <style>
-    @media (max-width: 768px) {
-        .blog-logo {
-            width: 100px;
-        }
+  @media (max-width: 768px) {
+    .blog-logo {
+      width: 100px;
     }
+  }
 </style>

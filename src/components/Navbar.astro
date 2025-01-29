@@ -1,84 +1,86 @@
 ---
+
 ---
 
-<nav id="navbar" class="sticky top-0 z-50 flex justify-center lg:justify-between items-center px-4 md:px-8 lg:px-20 py-4 md:py-6 border-b border-b-[#282828] bg-[#161616] transition-transform duration-300 ease-in-out">
-    <!-- Navigation Links -->
-    <ul class="flex space-x-4 md:space-x-6 text-white items-center">
-        {['Home', 'About', 'Blog', 'Project'].map((item, index) => {
-            const link = item === 'Home' ? '/' : `/${item.toLowerCase()}/`
-            const isActive = Astro.url.pathname === link
-            return (
-                <li 
-                    class={`text-sm md:text-base font-normal px-3 py-2 rounded-xl cursor-pointer ${
-                        isActive ? 'bg-[#1C1C1C]' : 'bg-transparent'
-                    }`}
-                    tabindex={index}
-                >
-                    <a href={link}>{item}</a>
-                </li>
-            )
-        })}
-    </ul>
+<nav
+  id="navbar"
+  class="sticky top-0 z-50 flex justify-center lg:justify-between items-center px-4 md:px-8 lg:px-20 py-4 md:py-6 border-b border-b-[#282828] bg-[#161616] transition-transform duration-300 ease-in-out"
+>
+  <!-- Navigation Links -->
+  <ul class="flex space-x-4 md:space-x-6 text-white items-center">
+    {
+      ["Home", "About", "Blog", "Project"].map((item, index) => {
+        const link = item === "Home" ? "/" : `/${item.toLowerCase()}/`;
+        const isActive = Astro.url.pathname === link;
+        return (
+          <li
+            class={`text-sm md:text-base font-normal px-3 py-2 rounded-xl cursor-pointer ${
+              isActive ? "bg-[#1C1C1C]" : "bg-transparent"
+            }`}
+            tabindex={index}
+          >
+            <a href={link}>{item}</a>
+          </li>
+        );
+      })
+    }
+  </ul>
 
-    <a href="/" class="hidden lg:block">
-        <img 
-            src="/assets/MMRI.svg"
-            alt="Blog Logo"
-            class="blog-logo w-10 md:w-12 lg:w-auto"
-        />
-    </a>
+  <a href="/" class="hidden lg:block">
+    <img src="/assets/MMRI.svg" alt="Blog Logo" class="blog-logo w-10 md:w-12 lg:w-auto" />
+  </a>
 </nav>
 
 <script>
-    import { animate, spring } from "motion"
+  import { animate, spring } from "motion";
 
-    const logo = document.querySelectorAll(".blog-logo")
+  const logo = document.querySelectorAll(".blog-logo");
 
-    logo.forEach(button => {
-        button.addEventListener('mouseenter', () => {
-            animate(button, { scale: 1.2 }, { type: spring, stiffness: 200 })
-        })
+  logo.forEach((button) => {
+    button.addEventListener("mouseenter", () => {
+      animate(button, { scale: 1.2 }, { type: spring, stiffness: 200 });
+    });
 
-        button.addEventListener('mouseleave', () => {
-            animate(button, { scale: 1 }, { type: spring, stiffness: 200 })
-        })
-    })
+    button.addEventListener("mouseleave", () => {
+      animate(button, { scale: 1 }, { type: spring, stiffness: 200 });
+    });
+  });
 
-    // Navbar scroll effect
-    let lastScrollY = window.scrollY;
-    const navbar = document.getElementById('navbar');
+  // Navbar scroll effect
+  let lastScrollY = window.scrollY;
+  const navbar = document.getElementById("navbar");
 
-    window.addEventListener('scroll', () => {
-        const currentScrollY = window.scrollY;
+  window.addEventListener("scroll", () => {
+    const currentScrollY = window.scrollY;
 
-        if (navbar) {
-            if (currentScrollY === 0) {
-                navbar.style.transform = 'translateY(0)';
-            } else if (currentScrollY > lastScrollY) {
-                navbar.style.transform = 'translateY(-100%)';
-            } else {
-                navbar.style.transform = 'translateY(0)';
-            }
-        }
+    if (navbar) {
+      if (currentScrollY === 0) {
+        navbar.style.transform = "translateY(0)";
+      } else if (currentScrollY > lastScrollY) {
+        navbar.style.transform = "translateY(-100%)";
+      } else {
+        navbar.style.transform = "translateY(0)";
+      }
+    }
 
-        lastScrollY = currentScrollY;
-    })
+    lastScrollY = currentScrollY;
+  });
 </script>
 
 <style>
+  .blog-logo {
+    width: 40px;
+  }
+
+  @media (min-width: 768px) {
     .blog-logo {
-        width: 40px;
+      width: 48px;
     }
+  }
 
-    @media (min-width: 768px) {
-        .blog-logo {
-            width: 48px;
-        }
+  @media (min-width: 1024px) {
+    .blog-logo {
+      width: auto;
     }
-
-    @media (min-width: 1024px) {
-        .blog-logo {
-            width: auto;
-        }
-    }
+  }
 </style>

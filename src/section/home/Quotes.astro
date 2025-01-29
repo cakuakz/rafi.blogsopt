@@ -1,31 +1,29 @@
 ---
 import CustomPageTitle from "@components/CustomPageTitle.astro";
-
-
 ---
-<div class="flex flex-col items-center justify-center text-center quotes-section w-full h-[100vh] xl:px-52">
-    <div class="px-14 quotes-title">
-        <CustomPageTitle 
-            title="The user dont see your code, they'll feel it."
-        />
-    </div>
-    <p class="text-[#909090] text-xl font-medium mt-4 quotes-title">
-        "The code you write makes you a programmer. The code you delete makes you a good one. The code you don’t have to write makes you a great one." — Mario Fusco.
-    </p>
+
+<div
+  class="flex flex-col items-center justify-center text-center quotes-section w-full h-[100vh] xl:px-52"
+>
+  <div class="px-14 quotes-title">
+    <CustomPageTitle title="The user dont see your code, they'll feel it." />
+  </div>
+  <p class="text-[#909090] text-xl font-medium mt-4 quotes-title">
+    "The code you write makes you a programmer. The code you delete makes you a good one. The code
+    you don’t have to write makes you a great one." — Mario Fusco.
+  </p>
 </div>
 <style>
-    .quotes-section {
-        background-image: url('/assets/radial_pattern_bg.svg');
-        background-position: center;
-        background-repeat: no-repeat;
-    }
+  .quotes-section {
+    background-image: url("/assets/radial_pattern_bg.svg");
+    background-position: center;
+    background-repeat: no-repeat;
+  }
 </style>
 <script>
-    import { animate, inView } from "motion"
+  import { animate, inView } from "motion";
 
-
-    inView(".quotes-title", (info) => {
-        animate(info.target, { opacity: [0, 1], y: [100, 0] }, { duration: 0.9})
-    })
+  inView(".quotes-title", (info) => {
+    animate(info.target, { opacity: [0, 1], y: [100, 0] }, { duration: 0.9 });
+  });
 </script>
-

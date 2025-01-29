@@ -1,47 +1,51 @@
 ---
-import MainLayout from "../layouts/MainLayout.astro"
-import Introduction from "src/section/home/Introduction.astro"
-import Traits from "src/section/home/Traits.astro"
-import Quotes from "src/section/home/Quotes.astro"
-import RecentBlog from "src/section/home/RecentBlog.astro"
-import Projects from "src/section/home/Projects.astro"
-import '@/styles/global.css'
+import MainLayout from "../layouts/MainLayout.astro";
+import Introduction from "src/section/home/Introduction.astro";
+import Traits from "src/section/home/Traits.astro";
+import Quotes from "src/section/home/Quotes.astro";
+import RecentBlog from "src/section/home/RecentBlog.astro";
+import Projects from "src/section/home/Projects.astro";
+import "@/styles/global.css";
 ---
-<MainLayout
-    title="Home"
-    description="Home Page"
->
-    <div class="px-4 md:px-32 flex flex-col">
-      <Introduction />
-      <Traits />
-      <Projects />
-      <Quotes />
-      <RecentBlog />
-    </div>
+
+<MainLayout title="Home" description="Home Page">
+  <div class="px-4 md:px-32 flex flex-col">
+    <Introduction />
+    <Traits />
+    <Projects />
+    <Quotes />
+    <RecentBlog />
+  </div>
 </MainLayout>
 <script>
-    import { animate, spring } from "motion";
-  
-    document.addEventListener("DOMContentLoaded", () => {
-      document.querySelectorAll(".stack-box").forEach((element) => {
-        const rotateMatch = element.className.match(/-?rotate-\[(\d+)deg\]/) || element.className.match(/-?rotate-(\d+)/);
-    
-        let rotateDegree = rotateMatch ? parseInt(rotateMatch[1]) : 0;
-        
-        if (element.className.includes("-rotate")) {
-          rotateDegree = -rotateDegree;
-        }
-    
-        animate(element, 
-          { scale: [0, 1], rotate: [rotateDegree, rotateDegree] }, 
-          { ease: "circInOut", duration: 0.7, delay: 0.5 }
-        )
-      })
+  import { animate, spring } from "motion";
 
-      const titleSections = document.querySelectorAll(".title-section")
-      titleSections.forEach((element) => {
-        animate(element, { opacity: [0, 1], transform: ['translateY(30px)', 'translateY(0px)']}, { type: spring, bounce: 0.5, duration: 1 })
-      })
-    })
-  </script>
-  
+  document.addEventListener("DOMContentLoaded", () => {
+    document.querySelectorAll(".stack-box").forEach((element) => {
+      const rotateMatch =
+        element.className.match(/-?rotate-\[(\d+)deg\]/) ||
+        element.className.match(/-?rotate-(\d+)/);
+
+      let rotateDegree = rotateMatch ? parseInt(rotateMatch[1]) : 0;
+
+      if (element.className.includes("-rotate")) {
+        rotateDegree = -rotateDegree;
+      }
+
+      animate(
+        element,
+        { scale: [0, 1], rotate: [rotateDegree, rotateDegree] },
+        { ease: "circInOut", duration: 0.7, delay: 0.5 }
+      );
+    });
+
+    const titleSections = document.querySelectorAll(".title-section");
+    titleSections.forEach((element) => {
+      animate(
+        element,
+        { opacity: [0, 1], transform: ["translateY(30px)", "translateY(0px)"] },
+        { type: spring, bounce: 0.5, duration: 1 }
+      );
+    });
+  });
+</script>

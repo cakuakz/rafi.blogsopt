@@ -1,160 +1,161 @@
 ---
-import CustomPageTitle from "@components/CustomPageTitle.astro"
-import CustomInput from "@components/CustomInput.astro"
-import MainLayout from "@layouts/MainLayout.astro"
-import BlogCard from "@components/blog/BlogCard.astro"
-import ButtonBlogTags from "@components/blog/ButtonBlogTags"
-import { getCollection } from "astro:content"
+import CustomPageTitle from "@components/CustomPageTitle.astro";
+import CustomInput from "@components/CustomInput.astro";
+import MainLayout from "@layouts/MainLayout.astro";
+import BlogCard from "@components/blog/BlogCard.astro";
+import ButtonBlogTags from "@components/blog/ButtonBlogTags";
+import { getCollection } from "astro:content";
 
-const posts = (await getCollection('blog')).sort(
-    (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
-)
+const posts = (await getCollection("blog")).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
 
-const tags = Array.from(
-    new Set(
-        posts.flatMap(post => post.data.tags || [])
-    )
-)
+const tags = Array.from(new Set(posts.flatMap((post) => post.data.tags || [])));
 ---
 
-<MainLayout
-    title="Blogs"
-    description="Blog Index Page"
->
-    <div class="flex flex-col px-4 sm:px-8 md:px-12 lg:px-20 pb-20 sm:pb-32 lg:pb-72 pt-8 lg:pt-14 justify-center blog-index-container">
-        <div class="flex flex-col items-center text-center mb-6 sm:mb-8 lg:mb-11 title-section blog-index-child">
-            <CustomPageTitle 
-                title="Blog"
-            />
-            <p class="text-sm sm:text-base font-normal text-[#7E7E7E]">Discover process behind every project</p>
-        </div>
-        
-        <div class="w-full px-0 sm:px-12 md:px-24 lg:px-[200px] xl:px-[431px] blog-index-child">
-            <CustomInput 
-                placeholder="Search Input"
-                iconName="mingcute:search-2-line"
-                iconClassname="w-4 text-[#83868A] ml-3"
-            />
-        </div>
-
-        <div id="blog-container">
-            <div class="mt-6 sm:mt-8 lg:mt-10 overflow-x-auto pb-4 sm:pb-0 blog-index-child">
-                <div class="flex items-center space-x-4 min-w-max sm:justify-center">
-                    <p class="text-xs sm:text-sm font-normal text-[#515457] whitespace-nowrap">Choose topic</p>
-                    {tags.map((tag) => (
-                        <ButtonBlogTags 
-                            tag={tag}
-                            isSelected={false}
-                            onTagClick={() => {}}
-                            client:load
-                        />
-                    ))}
-                </div>
-            </div>
-
-            <div class="mt-12 sm:mt-16 lg:mt-28 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-y-8 sm:gap-y-12 gap-x-3 blog-index-child">
-                {posts.map((item) => {
-                  return (
-                    <BlogCard
-                      title={item.data.title}
-                      description={item.data.description}
-                      tags={item.data.tags}
-                      href={`/blog/${item.slug}/`}
-                      duration={item.data.duration}
-                      imgUrl={item.data.heroImage}
-                    />
-                  );
-                })}
-            </div>
-        </div>
+<MainLayout title="Blogs" description="Blog Index Page">
+  <div
+    class="flex flex-col px-4 sm:px-8 md:px-12 lg:px-20 pb-20 sm:pb-32 lg:pb-72 pt-8 lg:pt-14 justify-center blog-index-container"
+  >
+    <div
+      class="flex flex-col items-center text-center mb-6 sm:mb-8 lg:mb-11 title-section blog-index-child"
+    >
+      <CustomPageTitle title="Blog" />
+      <p class="text-sm sm:text-base font-normal text-[#7E7E7E]">
+        Discover process behind every project
+      </p>
     </div>
+
+    <div class="w-full px-0 sm:px-12 md:px-24 lg:px-[200px] xl:px-[431px] blog-index-child">
+      <CustomInput
+        placeholder="Search Input"
+        iconName="mingcute:search-2-line"
+        iconClassname="w-4 text-[#83868A] ml-3"
+      />
+    </div>
+
+    <div id="blog-container">
+      <div class="mt-6 sm:mt-8 lg:mt-10 overflow-x-auto pb-4 sm:pb-0 blog-index-child">
+        <div class="flex items-center space-x-4 min-w-max sm:justify-center">
+          <p class="text-xs sm:text-sm font-normal text-[#515457] whitespace-nowrap">
+            Choose topic
+          </p>
+          {
+            tags.map((tag) => (
+              <ButtonBlogTags tag={tag} isSelected={false} onTagClick={() => {}} client:load />
+            ))
+          }
+        </div>
+      </div>
+
+      <div
+        class="mt-12 sm:mt-16 lg:mt-28 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-y-8 sm:gap-y-12 gap-x-3 blog-index-child"
+      >
+        {
+          posts.map((item) => {
+            return (
+              <BlogCard
+                title={item.data.title}
+                description={item.data.description}
+                tags={item.data.tags}
+                href={`/blog/${item.slug}/`}
+                duration={item.data.duration}
+                imgUrl={item.data.heroImage}
+              />
+            );
+          })
+        }
+      </div>
+    </div>
+  </div>
 </MainLayout>
 
 <script>
-    import { animate, spring, stagger } from "motion"
+  import { animate, spring, stagger } from "motion";
 
-    const titleSections = document.querySelectorAll(".title-section")
-    titleSections.forEach((element) => {
-        animate(
-            element, 
-            { 
-                opacity: [0, 1], 
-                transform: ['translateX(-30px)', 'translateX(0px)']
-            }, 
-            { 
-                type: spring, 
-                bounce: 0.5, 
-                duration: 0.7 
-            }
-        )
-    })
+  const titleSections = document.querySelectorAll(".title-section");
+  titleSections.forEach((element) => {
+    animate(
+      element,
+      {
+        opacity: [0, 1],
+        transform: ["translateX(-30px)", "translateX(0px)"],
+      },
+      {
+        type: spring,
+        bounce: 0.5,
+        duration: 0.7,
+      }
+    );
+  });
 
-    document.addEventListener("DOMContentLoaded", () => {
+  document.addEventListener("DOMContentLoaded", () => {
     const blogChildren = document.querySelectorAll(".blog-index-child");
 
-    animate(blogChildren, 
-        { 
-            opacity: [0, 1], 
-            transform: ['translateY(30px)', 'translateY(0px)'] 
-        }, 
-        { 
-            delay: stagger(0.1),
-            type: spring, 
-            bounce: 0.5, 
-            duration: 0.7 
-        }
-        );
-    });
+    animate(
+      blogChildren,
+      {
+        opacity: [0, 1],
+        transform: ["translateY(30px)", "translateY(0px)"],
+      },
+      {
+        delay: stagger(0.1),
+        type: spring,
+        bounce: 0.5,
+        duration: 0.7,
+      }
+    );
+  });
 
+  let selectedTag: string | null = null;
+  const blogContainer = document.getElementById("blog-container");
+  const searchInput = document.querySelector("input");
+  const posts = Array.from(blogContainer?.querySelectorAll("[data-post]") || []);
+  const buttons = Array.from(document.querySelectorAll("button"));
 
-    let selectedTag: string | null = null
-    const blogContainer = document.getElementById('blog-container')
-    const searchInput = document.querySelector('input')
-    const posts = Array.from(blogContainer?.querySelectorAll('[data-post]') || [])
-    const buttons = Array.from(document.querySelectorAll('button'))
-
-    function updateButtonStyles() {
-        buttons.forEach((button) => {
-            const buttonTag = button.querySelector('p')?.textContent
-            if (buttonTag === selectedTag) {
-                button.classList.add('text-[#F6F6F6]', 'bg-[#2E2F2F]')
-                button.classList.remove('opacity-50');
-            } else {
-                button.classList.remove('text-[#F6F6F6]', 'bg-[#2E2F2F]')
-                button.classList.add('opacity-50')
-            }
-        });
-    }
-
-    function filterPosts() {
-        const searchText = (searchInput?.value || "").toLowerCase()
-
-        posts.forEach((post) => {
-            const postTags = JSON.parse(post.getAttribute('data-tags') || '[]')
-            const postTitle = post.querySelector('.post-title')?.textContent?.toLowerCase() || ''
-            const postDescription = post.querySelector('.post-description')?.textContent?.toLowerCase() || ''
-            const postElement = post.closest('.justify-self-center')
-            
-            const matchesSearch = postTitle.includes(searchText) || postDescription.includes(searchText)
-            const matchesTag = !selectedTag || postTags.includes(selectedTag)
-
-            if (matchesSearch && matchesTag) {
-                postElement?.classList.remove('hidden')
-            } else {
-                postElement?.classList.add('hidden')
-            }
-        });
-
-        updateButtonStyles()
-    }
-
+  function updateButtonStyles() {
     buttons.forEach((button) => {
-        button.addEventListener('click', () => {
-            const tag = button.querySelector('p')?.textContent || null
-            selectedTag = selectedTag === tag ? null : tag
-            filterPosts()
-        });
+      const buttonTag = button.querySelector("p")?.textContent;
+      if (buttonTag === selectedTag) {
+        button.classList.add("text-[#F6F6F6]", "bg-[#2E2F2F]");
+        button.classList.remove("opacity-50");
+      } else {
+        button.classList.remove("text-[#F6F6F6]", "bg-[#2E2F2F]");
+        button.classList.add("opacity-50");
+      }
+    });
+  }
+
+  function filterPosts() {
+    const searchText = (searchInput?.value || "").toLowerCase();
+
+    posts.forEach((post) => {
+      const postTags = JSON.parse(post.getAttribute("data-tags") || "[]");
+      const postTitle = post.querySelector(".post-title")?.textContent?.toLowerCase() || "";
+      const postDescription =
+        post.querySelector(".post-description")?.textContent?.toLowerCase() || "";
+      const postElement = post.closest(".justify-self-center");
+
+      const matchesSearch = postTitle.includes(searchText) || postDescription.includes(searchText);
+      const matchesTag = !selectedTag || postTags.includes(selectedTag);
+
+      if (matchesSearch && matchesTag) {
+        postElement?.classList.remove("hidden");
+      } else {
+        postElement?.classList.add("hidden");
+      }
     });
 
-    searchInput?.addEventListener('input', filterPosts)
+    updateButtonStyles();
+  }
+
+  buttons.forEach((button) => {
+    button.addEventListener("click", () => {
+      const tag = button.querySelector("p")?.textContent || null;
+      selectedTag = selectedTag === tag ? null : tag;
+      filterPosts();
+    });
+  });
+
+  searchInput?.addEventListener("input", filterPosts);
 </script>

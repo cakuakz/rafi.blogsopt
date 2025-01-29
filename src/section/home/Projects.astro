@@ -3,50 +3,42 @@ import HomeButton from "@components/HomeButton.astro";
 import ProjectCard from "@components/ProjectCard.astro";
 import { getCollection } from "astro:content";
 
-const posts = (await getCollection('project')).sort(
-    (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
-)
+const posts = (await getCollection("project")).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
 
-const recentProjects = Array.from(
-    new Set(
-        posts.slice(0, 4)
-    )
-)
-
+const recentProjects = Array.from(new Set(posts.slice(0, 4)));
 ---
+
 <div class="flex flex-col space-y-20 items-center text-center mt-48">
-    <div class="flex flex-col text-center space-y-2 title-section">
-        <p class="text-5xl font-bold bg-gradient-to-r from-[#F6F6F6] to-[#909090] bg-clip-text text-transparent pb-1 gilroy">
-            Featured Projects
-        </p>
-        <p class="text-xl font-medium text-[#909090]">
-            Explore the process behind my work
-        </p>
-    </div>
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
-        {recentProjects.map((item) => (
-            <ProjectCard 
-                title={item.data.title}
-                href={`/project/${item.slug}/`}
-            />
-        ))}
-    </div>
-    <HomeButton 
-        text="See More"
-        className="project-button"
-    />
+  <div class="flex flex-col text-center space-y-2 title-section">
+    <p
+      class="text-5xl font-bold bg-gradient-to-r from-[#F6F6F6] to-[#909090] bg-clip-text text-transparent pb-1 gilroy"
+    >
+      Featured Projects
+    </p>
+    <p class="text-xl font-medium text-[#909090]">Explore the process behind my work</p>
+  </div>
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+    {
+      recentProjects.map((item) => (
+        <ProjectCard title={item.data.title} href={`/project/${item.slug}/`} />
+      ))
+    }
+  </div>
+  <HomeButton text="See More" className="project-button" />
 </div>
 <script>
-    import { inView, animate } from "motion"
+  import { inView, animate } from "motion";
 
-    inView(".title-section", (info) => {
-        animate(info.target, { opacity: [0, 1], y: [100, 0] }, { duration: 0.9})
-    })
+  inView(".title-section", (info) => {
+    animate(info.target, { opacity: [0, 1], y: [100, 0] }, { duration: 0.9 });
+  });
 
-    const buttons = document.querySelectorAll('button.project-button');
-    buttons.forEach((button) => {
-        button.addEventListener('click', () => {
-            location.replace('/project')
-        });
-    })
+  const buttons = document.querySelectorAll("button.project-button");
+  buttons.forEach((button) => {
+    button.addEventListener("click", () => {
+      location.replace("/project");
+    });
+  });
 </script>

@@ -1,4 +1,3 @@
-
 {
   "extends": "astro/tsconfigs/base",
   "compilerOptions": {
@@ -6,18 +5,10 @@
     "verbatimModuleSyntax": true,
     "baseUrl": ".",
     "paths": {
-      "@components/*": [
-        "src/components/*"
-      ],
-      "@layouts/*": [
-        "src/layouts/*"
-      ],
-      "@utils/*": [
-        "src/utils/*"
-      ],
-      "@/*": [
-        "./src/*"
-      ]
+      "@components/*": ["src/components/*"],
+      "@layouts/*": ["src/layouts/*"],
+      "@utils/*": ["src/utils/*"],
+      "@/*": ["./src/*"]
     },
     "allowJs": true,
     "jsx": "react-jsx",

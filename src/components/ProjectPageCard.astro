@@ -1,84 +1,89 @@
 ---
-import { Icon } from 'astro-icon/components'
+import { Icon } from "astro-icon/components";
 
 interface Props {
-    title: string
-    description: string
-    href: string
-    iconStackName: string[]
-    projectUrl?: string
-    heroImage?: string
+  title: string;
+  description: string;
+  href: string;
+  iconStackName: string[];
+  projectUrl?: string;
+  heroImage?: string;
 }
 
-const { title, description, href, iconStackName, projectUrl, heroImage } = Astro.props
+const { title, description, href, iconStackName, projectUrl, heroImage } = Astro.props;
 ---
 
 <div class="justify-self-center" data-post>
-        <div class="relative flex flex-col border border-[#242424] bg-[#1C1C1C] rounded-sm max-w-[430px] w-full h-full">
-            <div class="relative">
-                <img
-                    src={heroImage ? heroImage : "/assets/projects/project_placeholder.svg"}
-                    alt="Project placeholder"
-                    width={430}
-                    height={234}
-                    class="rounded-t-sm opacity-60"
-                    loading="lazy"
-                />
-                <div class="absolute inset-0 bg-gradient-to-b from-[#1C1C1C] via-transparent to-[#1C1C1C] opacity-100 pointer-events-none rounded-t-sm" 
-                     style="
+  <div
+    class="relative flex flex-col border border-[#242424] bg-[#1C1C1C] rounded-sm max-w-[430px] w-full h-full"
+  >
+    <div class="relative">
+      <img
+        src={heroImage ? heroImage : "/assets/projects/project_placeholder.svg"}
+        alt="Project placeholder"
+        width={430}
+        height={234}
+        class="rounded-t-sm opacity-60"
+        loading="lazy"
+      />
+      <div
+        class="absolute inset-0 bg-gradient-to-b from-[#1C1C1C] via-transparent to-[#1C1C1C] opacity-100 pointer-events-none rounded-t-sm"
+        style="
                         background: linear-gradient(
                             to bottom,
                             rgba(28, 28, 28, 0) 60%, 
                             rgba(28, 28, 28, 0.5) 90%, 
                             rgba(28, 28, 28, 1) 98%
                         );
-                     ">
-                </div>
-            </div>
-            <div class="px-4 pt-7 pb-4 flex flex-col justify-start h-full">
-                <p class="text-xl font-semibold text-[#F6F6F6]">{title}</p>
-                <p class="text-sm font-normal text-[#858585] mt-2 mb-7">{description}</p>
-                <div class="flex items-center space-x-2 mb-6">
-                    <p class="text-sm font-normal text-[#858585]">Stack:</p>
-                    {iconStackName.map((iconName) => (
-                        <Icon 
-                            name={iconName} 
-                            class="text-[#F6F6F6] mr-[2px]" 
-                            width={18} 
-                            height={18} 
-                        />
-                    ))}
-                </div>
-                <div class="flex items-center justify-between mt-auto">
-                    <button
-                        type="button"
-                        class="bg-gradient-to-b from-[#464646] to-[#2C2C2C] bg-clip-border p-[2px] rounded-[10px] about-project-button"
-                        data-href={href}
-                    >
-                        <div class="bg-[#262626] px-4 py-2 border-2 border-transparent flex items-center justify-center rounded-lg">
-                            <p class="text-[#F6F6F6] font-medium text-[10px]">About The Project</p>
-                        </div>
-                    </button>
+                     "
+      >
+      </div>
+    </div>
+    <div class="px-4 pt-7 pb-4 flex flex-col justify-start h-full">
+      <p class="text-xl font-semibold text-[#F6F6F6]">{title}</p>
+      <p class="text-sm font-normal text-[#858585] mt-2 mb-7">{description}</p>
+      <div class="flex items-center space-x-2 mb-6">
+        <p class="text-sm font-normal text-[#858585]">Stack:</p>
+        {
+          iconStackName.map((iconName) => (
+            <Icon name={iconName} class="text-[#F6F6F6] mr-[2px]" width={18} height={18} />
+          ))
+        }
+      </div>
+      <div class="flex items-center justify-between mt-auto">
+        <button
+          type="button"
+          class="bg-gradient-to-b from-[#464646] to-[#2C2C2C] bg-clip-border p-[2px] rounded-[10px] about-project-button"
+          data-href={href}
+        >
+          <div
+            class="bg-[#262626] px-4 py-2 border-2 border-transparent flex items-center justify-center rounded-lg"
+          >
+            <p class="text-[#F6F6F6] font-medium text-[10px]">About The Project</p>
+          </div>
+        </button>
 
-                    <a href={projectUrl ? projectUrl : '/404'}>
-                        <div class="links flex items-center space-x-1 cursor-pointer group">
-                            <Icon 
-                                name="mingcute:link-fill" 
-                                class="text-[#F6F6F6] transition-transform duration-300 ease-in-out group-hover:rotate-90" 
-                                width={12} 
-                                height={12} 
-                            />
-                            <p class="text-[10px] font-normal text-[#858585] border-b-0 border-b-[#F6F6F6] hover:border-b transition-opacity duration-100 ease-in-out group-hover:border-b">
-                                View Project
-                            </p>
-                        </div>                        
-                    </a>
-                </div>
-            </div>
-        </div>
+        <a href={projectUrl ? projectUrl : "/404"}>
+          <div class="links flex items-center space-x-1 cursor-pointer group">
+            <Icon
+              name="mingcute:link-fill"
+              class="text-[#F6F6F6] transition-transform duration-300 ease-in-out group-hover:rotate-90"
+              width={12}
+              height={12}
+            />
+            <p
+              class="text-[10px] font-normal text-[#858585] border-b-0 border-b-[#F6F6F6] hover:border-b transition-opacity duration-100 ease-in-out group-hover:border-b"
+            >
+              View Project
+            </p>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
 </div>
 <style>
-    /* .links::after {
+  /* .links::after {
         content: '';
         background-color: #F6F6F6;
         height: 1px;
@@ -90,7 +95,7 @@ const { title, description, href, iconStackName, projectUrl, heroImage } = Astro
         transition: width 0.3s;
     } */
 
-    /* .links:hover::after {
+  /* .links:hover::after {
         width: 18%;
     }
 
@@ -99,18 +104,17 @@ const { title, description, href, iconStackName, projectUrl, heroImage } = Astro
     } */
 </style>
 <script>
-    document.addEventListener("DOMContentLoaded", () => {
-        const aboutProjectButtons = document.querySelectorAll("button.about-project-button")
+  document.addEventListener("DOMContentLoaded", () => {
+    const aboutProjectButtons = document.querySelectorAll("button.about-project-button");
 
-        aboutProjectButtons.forEach((button) => {
-            const htmlButton = button as HTMLElement
-            htmlButton.addEventListener("click", () => {
-                const href = htmlButton.dataset.href
-                if (href) {
-                    location.href = href
-                }
-            })
-        })
-    })
+    aboutProjectButtons.forEach((button) => {
+      const htmlButton = button as HTMLElement;
+      htmlButton.addEventListener("click", () => {
+        const href = htmlButton.dataset.href;
+        if (href) {
+          location.href = href;
+        }
+      });
+    });
+  });
 </script>
-
