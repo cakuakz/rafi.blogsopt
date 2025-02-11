@@ -13,9 +13,11 @@ import sitemap from "@astrojs/sitemap";
 
 import netlify from "@astrojs/netlify";
 
+import robotsTxt from 'astro-robots-txt';
+
 // https://astro.build/config
 export default defineConfig({
-  site: process.env.SITE_URL || "http://localhost:4321",
+  site: "https://rafirfansyah.site/" ,
   integrations: [
     tailwind({
       applyBaseStyles: false,
@@ -28,6 +30,16 @@ export default defineConfig({
     react(),
     icon(),
     sitemap(),
+    robotsTxt({
+      host: 'rafirfansyah.site',
+			sitemap: 'https://rafirfansyah.site/sitemap-index.xml',
+			policy: [
+				{
+					userAgent: "*",
+					allow: "/",
+				},
+			],
+    })
   ],
   output: "static",
   adapter: netlify(),
