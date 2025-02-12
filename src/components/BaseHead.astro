@@ -20,7 +20,7 @@ const {
 <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 <meta name="generator" content={Astro.generator} />
 <meta name="author" content="Mohamad Rafi Irfansyah" />
-<meta name="keywords" content="Mohamad Rafi Irfansyah, Rafi Irfansyah" />
+<meta name="keywords" content="Mohamad Rafi Irfansyah, Rafi Irfansyah, Software Developer, Web Developer" />
 <link rel="sitemap" href="/sitemap-index.xml" />
 
 <!-- Canonical URL -->
@@ -28,6 +28,7 @@ const {
 
 <!-- Primary Meta Tags -->
 <title>{title}</title>
+<meta name="title" content={title} />
 <meta name="description" content={description} />
 
 <!-- Open Graph / Facebook -->
@@ -36,6 +37,7 @@ const {
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
 <meta property="og:image" content={new URL(image, Astro.site)} />
+<meta property="og:site_name" content="Mohamad Rafi Irfansyah" />
 
 <!-- Twitter -->
 <meta property="twitter:card" content="summary_large_image" />
@@ -43,8 +45,11 @@ const {
 <meta property="twitter:title" content={title} />
 <meta property="twitter:description" content={description} />
 <meta property="twitter:image" content={new URL(image, Astro.site)} />
+<meta property="twitter:creator" content="@mazrafihehe" />
 
 <!-- Article Metadata for Blog Posts -->
-{Astro.url.pathname.startsWith("/blog/") && (
-  <meta property="article:published_time" content="{new Date().toISOString()}" />
-)}
+{
+  Astro.url.pathname.startsWith("/blog/") && (
+    <meta property="article:published_time" content={new Date().toISOString()} />
+  )
+}

@@ -2,6 +2,7 @@
 import BaseHead from "@components/BaseHead.astro";
 import Footer from "@components/Footer.astro";
 import Navbar from "@components/Navbar.astro";
+import JsonLd from "@components/JsonLd.astro";
 import "@fontsource-variable/inter";
 import { AstroFont } from "astro-font";
 import { join } from "node:path";
@@ -10,15 +11,28 @@ import "@/styles/global.css";
 interface Props {
   title: string;
   description: string;
+  image?: string;
+  canonicalURL?: URL | string;
 }
 
-const { title, description } = Astro.props;
+const { 
+  title = "Mohamad Rafi Irfansyah - Personal Website",
+  description = "Welcome to the personal website of Mohamad Rafi Irfansyah. Discover my work, projects, and experiences.",
+  image,
+  canonicalURL
+} = Astro.props;
 ---
 
 <!doctype html>
 <html lang="en">
   <head>
-    <BaseHead title={title} description={description} />
+    <BaseHead 
+      title={title}
+      description={description}
+      image={image}
+      canonicalURL={canonicalURL}
+    />
+    <JsonLd />
     <AstroFont
       config={[
         {
@@ -59,6 +73,7 @@ const { title, description } = Astro.props;
     <Footer />
   </body>
 </html>
+
 <style is:global>
   html {
     font-family: "Inter Variable", sans-serif;

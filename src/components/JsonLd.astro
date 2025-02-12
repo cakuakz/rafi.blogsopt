@@ -1,0 +1,17 @@
+---
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Mohamad Rafi Irfansyah",
+  "givenName": "Mohamad Rafi",
+  "familyName": "Irfansyah",
+  "url": Astro.site,
+  "sameAs": [
+    "https://x.com/mazrafihehe",
+    "https://github.com/cakuakz",
+    "https://www.linkedin.com/in/mohamad-rafi-irfansyah"
+  ]
+};
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(schema)} />

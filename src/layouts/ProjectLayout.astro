@@ -6,6 +6,7 @@ import CustomPageTitle from "@components/CustomPageTitle.astro";
 import Footer from "@components/Footer.astro";
 import FormattedDate from "@components/FormattedDate.astro";
 import Navbar from "@components/Navbar.astro";
+import JsonLd from "@components/JsonLd.astro";
 import "@fontsource-variable/inter";
 import type { CollectionEntry } from "astro:content";
 import "@/styles/global.css";
@@ -16,15 +17,24 @@ type Props = CollectionEntry<"project">["data"] & {
     slug: string;
     text: string;
   }[];
+  slug?: string;
 };
 
-const { title, description, headings, pubDate, endProjectDate } = Astro.props;
+const { title, description, headings, pubDate, endProjectDate, slug } = Astro.props;
+
+// Construct canonical URL for projects
+const canonicalURL = slug ? new URL(`/project/${slug}`, Astro.site) : undefined;
 ---
 
 <!doctype html>
 <html lang="en">
   <head>
-    <BaseHead title={title} description={description} />
+    <BaseHead 
+      title={`${title} | Mohamad Rafi Irfansyah's Projects`}
+      description={description}
+      canonicalURL={canonicalURL}
+    />
+    <JsonLd />
   </head>
   <body>
     <Navbar />
@@ -80,6 +90,7 @@ const { title, description, headings, pubDate, endProjectDate } = Astro.props;
     <Footer />
   </body>
 </html>
+
 <style is:global>
   html {
     font-family: "Inter Variable", sans-serif;
@@ -139,6 +150,7 @@ const { title, description, headings, pubDate, endProjectDate } = Astro.props;
     transition: transform 0.2s ease;
   }
 </style>
+
 <script>
   import { animate, spring } from "motion";
 
