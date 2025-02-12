@@ -9,7 +9,7 @@ interface Props {
 const {
   title,
   description,
-  image = "/blog-logo.png",
+  image = "/assets/blog-logo.png",
   canonicalURL = new URL(Astro.url.pathname, Astro.site),
 } = Astro.props;
 ---
@@ -17,7 +17,7 @@ const {
 <!-- Global Metadata -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<link rel="icon" type="image/svg+xml" href="/blog-logo.png" />
+<link rel="icon" type="image/svg+xml" href="/assets/blog-logo.png" />
 <meta name="generator" content={Astro.generator} />
 <meta name="author" content="Mohamad Rafi Irfansyah" />
 <meta name="keywords" content="Mohamad Rafi Irfansyah, Rafi Irfansyah, Software Developer, Web Developer" />
