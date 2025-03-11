@@ -23,9 +23,14 @@ export default defineConfig({
       applyBaseStyles: false,
     }),
     mdx({
-      syntaxHighlight: false,
+      syntaxHighlight: "shiki",
       extendMarkdownConfig: false,
       gfm: false,
+      shikiConfig: {
+        theme: 'github-dark',
+        wrap: true,
+        defaultColor: false
+      }
     }),
     react(),
     icon(),

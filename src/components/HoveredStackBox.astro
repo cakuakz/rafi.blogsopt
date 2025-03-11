@@ -31,24 +31,22 @@ const { title, description, imageSource } = Astro.props;
 </div>
 
 <style>
-  /* Tooltip hover styles for larger screens */
   .tooltip-container:hover .tooltip {
     opacity: 1;
     visibility: visible;
     transform: translateX(-50%) translateY(0);
   }
 
-  /* Responsive design adjustments for smaller screens */
   @media (max-width: 767px) {
     .tooltip {
-      bottom: auto; /* Reset bottom positioning */
-      top: 110%; /* Place tooltip below the element */
+      bottom: auto;
+      top: 110%;
       left: 50%;
       transform: translateX(-50%);
-      min-width: 80%; /* Ensure tooltip width adjusts to screen */
-      max-width: 90vw; /* Prevent tooltip from overflowing */
-      max-height: 50vh; /* Limit height for smaller screens */
-      overflow-y: auto; /* Enable scrolling for overflow content */
+      min-width: 80%;
+      max-width: 90vw;
+      max-height: 50vh;
+      overflow-y: auto;
     }
   }
 </style>
