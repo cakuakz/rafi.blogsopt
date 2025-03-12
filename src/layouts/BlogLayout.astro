@@ -8,23 +8,35 @@ import Footer from "@components/Footer.astro";
 import FormattedDate from "@components/FormattedDate.astro";
 import Navbar from "@components/Navbar.astro";
 import JsonLd from "@components/JsonLd.astro";
+import TocDrawer from "@components/blog/TocDrawer";
 import "@fontsource-variable/inter";
 import type { CollectionEntry } from "astro:content";
 import "@/styles/global.css";
-import TocDrawer from "@components/blog/TocDrawer";
+
+// Props type
+interface Heading {
+  depth: number;
+  slug: string;
+  text: string;
+}
 
 type Props = CollectionEntry<"blog">["data"] & {
-  headings: {
-    depth: number;
-    slug: string;
-    text: string;
-  }[];
+  headings: Heading[];
   slug: string;
 };
 
-const { title, description, pubDate, updatedDate, tags, headings, duration, heroImage, slug } = Astro.props;
+const {
+  title,
+  description,
+  pubDate,
+  updatedDate,
+  tags,
+  headings,
+  duration,
+  heroImage,
+  slug
+} = Astro.props;
 
-// Construct canonical URL for blog posts
 const canonicalURL = new URL(`/blog/${slug}`, Astro.site);
 ---
 
@@ -39,58 +51,61 @@ const canonicalURL = new URL(`/blog/${slug}`, Astro.site);
     />
     <JsonLd />
   </head>
-  <body>
+  <body class="bg-neutral-900 min-h-screen font-inter text-white">
     <Navbar />
-    <main>
-      <article>
+    <main class="mx-auto px-5 lg:px-20 py-24">
+      <article class="relative">
         <img
           src="/assets/radial_pattern_bg.svg"
-          alt="Radial Bg"
+          alt="Radial Background"
           class="absolute top-0 left-0 opacity-30 z-[-1]"
         />
-        <div class="flex flex-col px-5 lg:px-20 py-24 relative">
-          <CustomPageTitle title={title} className="title-section text-3xl md:!text-6xl" />
-          <div class="flex">
-            <div class="flex flex-col">
-              <div class="flex flex-col space-y-8 md:space-y-16">
-                <p class="text-[#F6F6F6] font-light text-sm md:text-lg pr-7 title-section">
-                  {description}
-                </p>
-                <div class="flex items-center">
-                  <div class="pr-7 border-r-[0.5px] border-r-white">
-                    <FormattedDate date={pubDate} />
-                  </div>
-                  <span class="px-7">
-                    <p class="text-[#F6F6F6] font-light text-xs">{duration}</p>
-                  </span>
-                  {
-                    updatedDate && (
-                      <div class="last-updated-on">
-                        Last updated on <FormattedDate date={updatedDate} />
-                      </div>
-                    )
-                  }
-                </div>
-              </div>
-              <div class="flex flex-col mt-5 p-4 border border-[#272727] rounded-md max-w-[850px]">
-                <p class="text-white font-light text-base pr-7">Topics</p>
-                <div class="flex space-x-4 mt-3 w-fit">
-                  {tags.map((tag) => <BlogTag tags={tag} />)}
-                </div>
-              </div>
-              <div class="blog-body">
-                <slot />
-              </div>
+        <CustomPageTitle 
+          title={title} 
+          className="title-section text-3xl md:text-6xl mb-8" 
+        />
+        <section class="flex flex-col space-y-8 md:space-y-16">
+          <p class="text-[#F6F6F6] font-light text-sm md:text-lg pr-7">
+            {description}
+          </p>
+          <div class="flex flex-wrap items-center text-xs md:text-sm">
+            <div class="pr-7 border-r border-white/50">
+              <FormattedDate date={pubDate} />
             </div>
-            <div class="hidden lg:flex flex-col items-center pl-32 pt-32 w-fit">
-              {headings.length > 0 && <TableOfContent headings={headings} />}
-            </div>
-            <div class="fixed bottom-8 right-4 lg:hidden">
-              {headings.length > 0 && <TocDrawer headings={headings} client:only="react" />}
-            </div>
+            <span class="px-7 text-[#F6F6F6] font-light">
+              {duration}
+            </span>
+            {updatedDate && (
+              <div class="ml-4 text-white/70">
+                Last updated on <FormattedDate date={updatedDate} />
+              </div>
+            )}
           </div>
+        </section>
+        <section class="mt-8 border border-[#272727] rounded-md p-4 lg:max-w-[840px] 2xl:max-w-5xl">
+          <p class="text-white font-light text-base">Topics</p>
+          <div class="flex flex-wrap gap-3 mt-3">
+            {tags.map((tag) => (
+              <BlogTag tags={tag} />
+            ))}
+          </div>
+        </section>
+        <div class="flex flex-col lg:flex-row">
+          <div class="blog-body w-full xl:w-3/4 pt-10">
+            <slot />
+          </div>
+          {headings.length > 0 && (
+            <aside class="hidden xl:flex flex-col items-start pl-8 -mt-[106px] w-1/4">
+              <TableOfContent headings={headings} />
+            </aside>
+          )}
         </div>
-        <div class="flex justify-center px-20 py-4 mb-7 items-center border-t border-[#272727]">
+        {headings.length > 0 && (
+          <div class="fixed bottom-8 right-4 xl:hidden">
+            <TocDrawer headings={headings} client:only="react" />
+          </div>
+        )}
+        <div class="flex justify-center px-5 lg:px-20 py-10 border-t border-[#272727] mt-20">
           <Comments />
         </div>
       </article>
@@ -105,11 +120,17 @@ const canonicalURL = new URL(`/blog/${slug}`, Astro.site);
     scroll-behavior: smooth;
   }
 
-  body {
-    background-color: #161616;
-    word-wrap: break-word;
-    overflow-wrap: break-word;
-    line-height: 1.7;
+  pre {
+    padding: 16px;
+    background-color: #1e1e1e;
+    border-radius: 8px;
+    overflow-x: auto;
+    margin-block: 16px;
+  }
+
+  .blog-body {
+    color: #83868a;
+    text-align: justify;
   }
 
   h1 {
@@ -147,15 +168,27 @@ const canonicalURL = new URL(`/blog/${slug}`, Astro.site);
     position: relative;
   }
 
-  .blog-body {
-    color: #83868a;
-    padding-top: 2em;
-    text-align: justify;
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
   }
 
-  .icon-button.shrink {
-    transform: scale(0.9);
-    transition: transform 0.2s ease;
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: #666;
+    border-radius: 4px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: #444;
+  }
+
+  html {
+    scrollbar-width: thin;
+    scrollbar-color: #666 transparent;
   }
 </style>
 
@@ -168,12 +201,12 @@ const canonicalURL = new URL(`/blog/${slug}`, Astro.site);
       element,
       {
         opacity: [0, 1],
-        transform: ["translateX(-50px)", "translateX(0px)"],
+        transform: ["translateX(-50px)", "translateX(0px)"]
       },
       {
         type: spring,
         bounce: 0.7,
-        duration: 1.5,
+        duration: 1.5
       }
     );
   });

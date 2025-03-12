@@ -149,6 +149,29 @@ const canonicalURL = slug ? new URL(`/project/${slug}`, Astro.site) : undefined;
     transform: scale(0.9);
     transition: transform 0.2s ease;
   }
+
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px; 
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: #666;
+    border-radius: 4px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: #444;
+  }
+
+  html {
+    scrollbar-width: thin;
+    scrollbar-color: #666 transparent;
+  }
 </style>
 
 <script>

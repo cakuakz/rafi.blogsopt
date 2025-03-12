@@ -22,16 +22,7 @@ export default defineConfig({
     tailwind({
       applyBaseStyles: false,
     }),
-    mdx({
-      syntaxHighlight: "shiki",
-      extendMarkdownConfig: false,
-      gfm: false,
-      shikiConfig: {
-        theme: 'github-dark',
-        wrap: true,
-        defaultColor: false
-      }
-    }),
+    mdx(),
     react(),
     icon(),
     sitemap(),
